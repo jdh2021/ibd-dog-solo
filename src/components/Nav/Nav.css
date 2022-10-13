@@ -1,34 +1,58 @@
 .nav {
   /* flex box layout */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-
-  margin: 0 0 30px;
-  background-color: #00acb0;
+  padding-top: 0.2rem;
+  margin: 0px;
   overflow: hidden;
 }
 
-.nav a {
+.header {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: plum;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  margin: 0;
+  color: black;
+  border-bottom: solid 5px darkgray;
+}
+
+.header a {
   text-decoration: none;
 }
 
-.nav-title {
-  font-size: 24px;
+.Header-title {
+  color: black;
+  font-size: 2.1rem;
   font-weight: 700;
-  color: #f2f2f2;
-  padding-left: 10px;
   margin: 0;
 }
 
 .navLink {
+  /* min-width: 20px;
+  max-width: 20px; */
   display: inline-block;
-  color: #f2f2f2;
-  background-color: #00acb0;
-  text-align: center;
-  padding: 24px 10px;
-  text-decoration: none;
-  font-size: 15px;
+  color: #9c27b0;
+  background-color: white;
+  padding: 0.8rem;
+
+}
+
+.Log-out {
+  display: inline-block;
+  min-width: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  max-height: 24px;
+  display: inline-block;
+  color: #9c27b0;
+  background-color: white;
+  padding: 0.8rem;
 
   /* these last two make the logout button in
   the nav bar look like another link */
@@ -37,6 +61,10 @@
   outline: 0;
 }
 
+.Log-out:hover {
+  color: plum;
+}
+
 .navLink:hover {
-  background-color: #008183;
+  color: plum;
 }
