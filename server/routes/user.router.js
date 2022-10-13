@@ -14,9 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
-// Handles POST request with new user data and dog
-// The only thing different from this and every other post we've seen
-// is that the password gets encrypted before being inserted
+// Handles POST request with new user data and dog. Password gets encrypted before being inserted
 router.post('/register', async (req, res, next) => {
   console.log('in api/user/register POST');
   console.log('Req.body is:', req.body);
