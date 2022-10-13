@@ -14,22 +14,36 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
-// Handles POST request with new user data
+// Handles POST request with new user data and dog
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {
+router.post('/register', async (req, res, next) => {
+  console.log('in api/user/register POST');
+  console.log('Req.body is:', req.body);
+  const client = await pool.connect();
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
-
-  const queryText = `INSERT INTO "user" (username, password)
-    VALUES ($1, $2) RETURNING id`;
-  pool
-    .query(queryText, [username, password])
-    .then(() => res.sendStatus(201))
-    .catch((err) => {
-      console.log('User registration failed: ', err);
-      res.sendStatus(500);
-    });
+  const dogName = req.body.name;
+  const dogBirthday = req.body.birthday;
+  try {
+    const queryText = `INSERT INTO "user" (username, password)
+                      VALUES ($1, $2) RETURNING "id";`;
+    let response = await pool.query(queryText, [username, password])
+     // creating user id
+    const userId = response.rows[0].id;
+    console.log('User id is:', userId);
+    await pool.query( `INSERT INTO "dog" ("name", "birthday", "user_id")
+                      VALUES($1, $2, $3);`, [dogName, dogBirthday, userId]);
+    // commit if queries succeed
+    await client.query('COMMIT');
+    res.sendStatus(201); //created
+  } catch (error) {
+    console.log('User registration failed: ', error);
+    await client.query('ROLLBACK');
+    res.sendStatus(500);
+  } finally {
+    client.release();
+  }
 });
 
 // Handles login form authenticate/login POST
