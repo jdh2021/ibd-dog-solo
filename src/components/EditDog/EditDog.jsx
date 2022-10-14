@@ -18,7 +18,7 @@ function EditDog({ setEditDog }) {
   // selector to retrieve dog object data from dog reducer in store
   const dog = useSelector(store => store.dog);
 
-  // local state to set initial values of input fields to values from store
+  // local state for changeable values of input fields
   const [editDogName, setEditDogName] = useState(dog.name);
   const [editDogBirthday, setEditDogBirthday] = useState(dog.birthday);
   const [editDogImage, setEditDogImage] = useState(dog.image);
@@ -98,8 +98,6 @@ function EditDog({ setEditDog }) {
       </CardActions>
     </form>
   );
-
-
 }
 
 export default EditDog;
