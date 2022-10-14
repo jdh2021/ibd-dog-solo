@@ -22,6 +22,7 @@ function UserPage() {
     dispatch({ type: 'FETCH_DOG' });
   }, []);
 
+  // retrieve data from dog, medication reducer in store
   const dog = useSelector(store => store.dog);
   const medications = useSelector(store => store.medication);
 
@@ -32,6 +33,7 @@ function UserPage() {
   // local state for conditional rendering of editDog card
   const [editDog, setEditDog] = useState(false);
 
+  // on click of Edit button, setEditDog to true to render EditDog view
   const handleEditDog = () => {
     setEditDog(true);
   }
@@ -49,7 +51,7 @@ function UserPage() {
                 mt: 4,
               }}
               component="img"
-              image={dog.image != null ? dog.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Golde33443.jpg/440px-Golde33443.jpg'}
+              image={dog.image != null ? dog.image : 'images/dog-default.jpg'}
             />
             <CardContent>
               <Typography variant="h6">
@@ -64,7 +66,7 @@ function UserPage() {
                   medications.map(medication =>
                     medication.active && <span key={medication.id}> &#8226; {medication.name} </span>
                   )
-                  : <span>None</span>
+                  : <span>None active</span>
                 }
               </Typography>
             </CardContent>

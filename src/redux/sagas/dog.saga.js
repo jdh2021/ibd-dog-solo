@@ -16,6 +16,7 @@ function* fetchDog() {
   }
 }
 
+
 function* dogSaga() {
   yield takeLatest('FETCH_DOG', fetchDog);
 }
