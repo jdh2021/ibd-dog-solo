@@ -63,9 +63,15 @@ function CheckIn() {
     }
   }
 
-  // if POST successful, navigate to HealthStatus
+  // if POST successful, navigate to HealthStatus and clear inputs
   const goToHealthStatus = () => {
     history.push('/healthstatus');
+    setAppetite('');
+    setEnergy('');
+    setStomachPain('');
+    setVomit('');
+    setDiarrhea('');
+    setMedicationStatus(false);
   }
 
   return (

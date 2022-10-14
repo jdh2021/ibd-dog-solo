@@ -11,7 +11,7 @@ function* fetchDog() {
     // after successful SET, 'FETCH_MEDICATION' using dog data
     yield put({ type: 'FETCH_MEDICATION', payload: userDog.data });
   } catch (error) {
-    console.log('Error in fetchDog dog:', error);
+    console.log('Error in fetchDog:', error);
     alert('There\'s an error in fetchDog.');
   }
 }
@@ -22,7 +22,7 @@ function* putDog(action) {
     yield axios.put('/api/dog', action.payload);
     action.handleEditSuccess();
   } catch (error) {
-    console.log('Error in putDog dog:', error);
+    console.log('Error in putDog:', error);
     alert('There\'s an error in putDog.');
   }
 }
