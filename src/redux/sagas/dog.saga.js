@@ -16,9 +16,20 @@ function* fetchDog() {
   }
 }
 
+function* putDog(action) {
+  try {
+    console.log('dog object to update is:', action.payload);
+    yield axios.put('/api/dog', action.payload);
+    action.handleEditSuccess();
+  } catch (error) {
+    console.log('Error in putDog dog:', error);
+    alert('There\'s an error in putDog.');
+  }
+}
 
 function* dogSaga() {
   yield takeLatest('FETCH_DOG', fetchDog);
+  yield takeLatest('PUT_DOG', putDog);
 }
 
 export default dogSaga;

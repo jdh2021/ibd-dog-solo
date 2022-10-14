@@ -40,7 +40,7 @@ function UserPage() {
 
   return (
     <Grid container justifyContent="center">
-      <Grid item xs={8} sm={6} md={5} lg={4} xl={3}>
+      <Grid item xs={8} sm={6} md={4.5} lg={3.75} xl={3}>
         {editDog === false ?
           <Card elevation={4} sx={{ backgroundColor: "#eaeef1", mb: 4, mt: 4 }}>
             <CardMedia
@@ -48,7 +48,7 @@ function UserPage() {
                 width: 250,
                 height: 250,
                 display: "inline",
-                mt: 4,
+                mt: 6,
               }}
               component="img"
               image={dog.image != null ? dog.image : 'images/dog-default.jpg'}
@@ -66,12 +66,12 @@ function UserPage() {
                   medications.map(medication =>
                     medication.active && <span key={medication.id}> &#8226; {medication.name} </span>
                   )
-                  : <span>None active</span>
+                  : <span>-</span>
                 }
               </Typography>
             </CardContent>
             <CardActions sx={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-              <Button variant="contained" sx={{ mb: 2, mr: 2 }} onClick={handleEditDog} >Edit</Button>
+              <Button variant="contained" sx={{ mb: 4 }} onClick={handleEditDog} >Edit</Button>
             </CardActions>
           </Card> :
           // render if editDog is true

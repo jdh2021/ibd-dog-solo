@@ -28,8 +28,8 @@ function EditDog({ setEditDog }) {
     setEditDog(false);
   }
 
-  /* convert dog birthday string to YYYY-MM-DD format to insert into database. check that dogName and dogBirthday aren't empty strings
-    dispatch 'PUT_DOG' with payload of updated dog object and function handleEditSuccess */
+  /* convert dog birthday string to YYYY-MM-DD format to insert into database. check that dogName and dogBirthday aren't empty strings.
+  dispatch 'PUT_DOG' with payload of updated dog object and function handleEditSuccess */
   const handleEditSave = (event) => {
     event.preventDefault();
     console.log('in handleEditSave');
@@ -88,7 +88,6 @@ function EditDog({ setEditDog }) {
             value={editDogImage === null ? '' : editDogImage}
             onChange={(event) => setEditDogImage(event.target.value)}
             label="URL for Photo"
-            required
           />
         </Stack>
       </CardContent>
