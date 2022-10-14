@@ -39,9 +39,33 @@ function CheckIn() {
   const [diarrhea, setDiarrhea] = useState('');
   const [medicationStatus, setMedicationStatus] = useState(false);
 
+  // dispatch 'POST_RECORD' with payload of symptom record object and function goToHealthStatus
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('in handleSubmit:', dog.id, energy, appetite, stomachPain, vomit, diarrhea, medicationStatus);
+    console.log('in handleSubmit');
+    if (appetite === '' || energy === '' || stomachPain === '' || vomit === '' || diarrhea === '') {
+      alert('Please complete all fields to submit.');
+      return;
+    } else {
+      dispatch({
+        type: 'POST_RECORD',
+        payload: {
+          dog_id: dog.id,
+          appetite: appetite,
+          energy: energy,
+          stomach_pain: stomachPain,
+          vomit: vomit,
+          diarrhea: diarrhea,
+          med_given: medicationStatus,
+        },
+        goToHealthStatus: goToHealthStatus
+      })
+    }
+  }
+
+  // if POST successful, navigate to HealthStatus
+  const goToHealthStatus = () => {
+    history.push('/healthstatus');
   }
 
   return (
@@ -119,4 +143,4 @@ function CheckIn() {
   );
 }
 
-export default CheckIn;
+  export default CheckIn;
