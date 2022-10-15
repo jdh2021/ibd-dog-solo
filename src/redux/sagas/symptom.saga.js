@@ -9,7 +9,7 @@ function* postRecord(action) {
     action.goToHealthStatus();
   } catch (error) {
     console.log('Error in postRecord:', error);
-    alert('There\'s an error in postRecrd.');
+    alert('There\'s an error in postRecord.');
   }
 }
 

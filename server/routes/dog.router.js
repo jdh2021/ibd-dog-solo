@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 
 // PUT dog - check dog id and req.user.id
 router.put('/', (req, res) => {
-  console.log('in api/dog PUT. Dog object to update is:', req.body);
+  console.log('in /api/dog PUT. Dog object to update is:', req.body);
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user id is:', req.user.id);
   // response: s/b 200 - OK (dog updated)
