@@ -12,6 +12,8 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function SymptomRecord({ symptomRecord }) {
+  const dispatch = useDispatch();
+
   // formatting date object of symptom record to display YY.MM.DD
   const date = new Date(symptomRecord.created_at);
   const dateDisplay = `${(date.getMonth() + 1)}.${date.getDate()}.${date.getFullYear().toLocaleString().slice(-2)}`;
@@ -93,6 +95,31 @@ function SymptomRecord({ symptomRecord }) {
       diarrheaDisplay;
   }
 
+  // prompt if record should be deleted, takes in id of record clicked on. if confirmed, calls deleteFeedback and passes ID as argument
+  const confirmDelete = (symptomRecord) => {
+    console.log('in confirmDelete. Record id to delete is:', symptomRecord.id);
+    if (window.confirm('Do you want to delete this record?')) {
+      deleteSymptomRecord(symptomRecord);
+    }
+  }
+
+  // dispatches 'DELETE_RECORD', payload is symptomRecord id, dog_id, function handleSymptomRecordDelete
+  const deleteSymptomRecord = (symptomRecord) => {
+    dispatch({
+      type: 'DELETE_RECORD',
+      payload: {
+        id: symptomRecord.id,
+        dog_id: symptomRecord.dog_id,
+      },
+      handleSymptomRecordDelete: handleSymptomRecordDelete
+    })
+  }
+
+  const handleSymptomRecordDelete = () => {
+    console.log('in handleSymptomRecordDelete');
+    dispatch({ type: 'FETCH_RECORD' });
+  }
+
   return (
     <TableRow key={symptomRecord.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
       <TableCell component="th" scope="row" align="center" sx={{ p: 0.2 }}>{dateDisplay}</TableCell>
@@ -108,12 +135,12 @@ function SymptomRecord({ symptomRecord }) {
         }
       </TableCell>
       <TableCell align="center" sx={{ p: 0.2 }}>
-        <IconButton sx={{ color: "#666666" }}>
+        <IconButton sx={{ color: "#9c27b0" }}>
           <FontAwesomeIcon icon={faPenToSquare} size="xs" />
         </IconButton>
       </TableCell>
       <TableCell align="center" sx={{ p: 0.2 }}>
-        <IconButton sx={{ color: "#666666" }}>
+        <IconButton sx={{ color: "#9c27b0" }} onClick={() => confirmDelete(symptomRecord)}>
           <FontAwesomeIcon icon={faTrash} size="xs" />
         </IconButton>
       </TableCell>

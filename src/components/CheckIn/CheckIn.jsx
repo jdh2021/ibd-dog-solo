@@ -32,7 +32,6 @@ function CheckIn() {
   const date = new Date();
   const currentDate = `${(date.getMonth() + 1)}.${date.getDate()}.${date.getFullYear().toLocaleString().slice(-2)}`;
   let recordPreviouslyEntered = false;
-  let dateToDisplay = '';
 
   // local state for changeable values of input fields
   const [appetite, setAppetite] = useState('');
