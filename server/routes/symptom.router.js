@@ -15,7 +15,8 @@ router.get('/:id', (req, res) => {
                       "symptom"."dog_id" FROM "symptom"
                       JOIN "dog" on "symptom"."dog_id"="dog"."id"
                       JOIN "user" on "dog"."user_id"="user"."id"
-                      WHERE "dog"."id" = $1 AND "user"."id" = $2;`;
+                      WHERE "dog"."id" = $1 AND "user"."id" = $2
+                      ORDER BY "created_at" DESC;`;
     pool.query(queryText, [req.params.id, req.user.id]).then(result => {
       console.log('/symptom GET success');
       res.send(result.rows); // array of symptom records

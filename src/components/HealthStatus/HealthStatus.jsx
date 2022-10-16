@@ -10,6 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import TablePagination from '@mui/material/TablePagination';
 import Typography from '@mui/material/Typography';
 
 function HealthStatus() {
@@ -22,6 +23,19 @@ function HealthStatus() {
   useEffect(() => {
     dispatch({ type: 'FETCH_DOG' });
   }, []);
+
+  // table pagination
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(7);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   return (
     <Grid container justifyContent="center">
@@ -44,15 +58,26 @@ function HealthStatus() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {records.map(symptomRecord => {
-                return <SymptomRecord 
-                  symptomRecord={symptomRecord} 
-                  key={symptomRecord.id}
-                />
+              {records
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map(symptomRecord => {
+                  return <SymptomRecord
+                    symptomRecord={symptomRecord}
+                    key={symptomRecord.id}
+                  />
                 })
               }
             </TableBody>
           </Table>
+          <TablePagination
+            rowsPerPageOptions={[7, 14, 30]}
+            component="div"
+            count={records.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
         </TableContainer>
       </Grid>
     </Grid>

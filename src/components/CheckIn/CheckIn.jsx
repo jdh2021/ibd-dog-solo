@@ -31,7 +31,7 @@ function CheckIn() {
   // creating date object and formatting current date YY.MM.DD
   const date = new Date();
   const currentDate = `${(date.getMonth() + 1)}.${date.getDate()}.${date.getFullYear().toLocaleString().slice(-2)}`;
-  let recordEntered = false;
+  let recordPreviouslyEntered = false;
   let dateToDisplay = '';
 
   // local state for changeable values of input fields
@@ -47,12 +47,8 @@ function CheckIn() {
     const historicalRecordDate = new Date(symptomRecord.created_at);
     const historicalRecordFormattedDate = `${(historicalRecordDate.getMonth() + 1)}.${historicalRecordDate.getDate()}.${historicalRecordDate.getFullYear().toLocaleString().slice(-2)}`;
     if (currentDate === historicalRecordFormattedDate) {
-      dateToDisplay = <Typography variant="subtitle1" color='#f57c00' sx={{ mb: 2, mt: 0.5 }}>A record was already added today!</Typography>
-      recordEntered = true;
-      return;
+      recordPreviouslyEntered = true;
     }
-    dateToDisplay = <Typography variant="h6" color='#9c27b0' sx={{ mb: 2 }}>{currentDate}</Typography>
-    return;
   })
 
   // dispatch 'POST_RECORD' with payload of symptom record object and function goToHealthStatus
@@ -62,7 +58,7 @@ function CheckIn() {
     if (appetite === '' || energy === '' || stomachPain === '' || vomit === '' || diarrhea === '') {
       alert('Please complete all fields to submit.');
       return;
-    } else if (recordEntered) {
+    } else if (recordPreviouslyEntered) {
       alert('A record was already added today! Please come back tomorrow.');
     } else {
       dispatch({
@@ -92,10 +88,13 @@ function CheckIn() {
         <Grid item xs={10} sm={8.25} md={6} lg={4.5} xl={3.25}>
           <Card elevation={4} sx={{ backgroundColor: "#eaeef1", mb: 4, mt: 4, pb: 2 }}>
             <CardContent>
-              <Typography variant="h6" sx={{ mt: 3 }}>
+              <Typography variant="h6" sx={{ mt: 2 }}>
                 Daily Check-in
               </Typography>
-              {dateToDisplay}
+              { recordPreviouslyEntered ? 
+                <Typography variant="subtitle1" color='#f57c00' sx={{ mb: 2, mt: 0.5 }}>A record was already added today!</Typography> :
+                <Typography variant="h6" color='#9c27b0' sx={{ mb: 2 }}>{currentDate}</Typography>
+              }
               <FormControl sx={{ mb: 1 }}>
                 <FormLabel>Appetite</FormLabel>
                 <RadioGroup row value={appetite} onChange={(event) => setAppetite(event.target.value)}>
