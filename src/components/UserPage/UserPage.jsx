@@ -51,7 +51,7 @@ function UserPage() {
                 mt: 6,
               }}
               component="img"
-              image={dog.image != '' ? dog.image : 'images/dog-default.jpg'}
+              image={dog.image != '' ? dog.image : 'images/dog.jpg'}
             />
             <CardContent>
               <Typography variant="h6">
