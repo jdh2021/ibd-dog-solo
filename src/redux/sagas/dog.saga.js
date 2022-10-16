@@ -8,8 +8,9 @@ function* fetchDog() {
     console.log('get dog by userId:', userDog.data);
     // after successful GET, dispatch action to store dog in dog reducer
     yield put({ type: 'SET_DOG', payload: userDog.data });
-    // after successful SET, 'FETCH_MEDICATION' using dog data
-    yield put({ type: 'FETCH_MEDICATION', payload: userDog.data });
+    // after successful SET, 'FETCH_MEDICATION', 'FETCH_RECORD' using dog data
+    yield put({ type: 'FETCH_MEDICATION', payload: userDog.data.id });
+    yield put({ type: 'FETCH_RECORD', payload: userDog.data.id });
   } catch (error) {
     console.log('Error in fetchDog:', error);
     alert('There\'s an error in fetchDog.');

@@ -5,8 +5,8 @@ import axios from 'axios';
 function* fetchMedication(action) {
   // payload is dog object retrieved once 'FETCH_DOG' fires. payload.id is dog id.
   try {
-    console.log('Dog id to retrieve medication for is:', action.payload.id);
-    const dogMedication = yield axios.get(`/api/medication/${action.payload.id}`);
+    console.log('Dog id to retrieve medication for is:', action.payload);
+    const dogMedication = yield axios.get(`/api/medication/${action.payload}`);
     console.log('dogMedication array:', dogMedication.data);
     yield put({ type: 'SET_MEDICATION', payload: dogMedication.data });
   } catch (error) {
