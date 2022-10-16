@@ -31,6 +31,7 @@ function CheckIn() {
   // create date object and formatting for current date
   const date = new Date();
   const currentDate = `${(date.getMonth() + 1)}.${date.getDate()}.${date.getFullYear().toLocaleString().slice(-2)}`;
+  let recordEntered = false;
   let dateToDisplay = '';
 
   // local state for changeable values of input fields
@@ -45,11 +46,9 @@ function CheckIn() {
   records.map(symptomRecord => {
     const historicalRecordDate = new Date(symptomRecord.created_at);
     const historicalRecordFormattedDate = `${(historicalRecordDate.getMonth() + 1)}.${historicalRecordDate.getDate()}.${historicalRecordDate.getFullYear().toLocaleString().slice(-2)}`;
-    console.log('current date is:', currentDate);
-    console.log('historical record date is:', historicalRecordDate);
-    console.log('formatted historical record date is:', historicalRecordFormattedDate);
     if (currentDate === historicalRecordFormattedDate) {
       dateToDisplay = <Typography variant="subtitle1" color='#f57c00' sx={{ mb: 2, mt: 0.5 }}>A record was already added today!</Typography>
+      recordEntered = true;
       return;
     }
     dateToDisplay = <Typography variant="h6" color='#9c27b0' sx={{ mb: 2 }}>{currentDate}</Typography>
@@ -64,6 +63,8 @@ function CheckIn() {
     if (appetite === '' || energy === '' || stomachPain === '' || vomit === '' || diarrhea === '') {
       alert('Please complete all fields to submit.');
       return;
+    } else if (recordEntered) {
+      alert('A record was already added today! Please come back tomorrow.');
     } else {
       dispatch({
         type: 'POST_RECORD',
