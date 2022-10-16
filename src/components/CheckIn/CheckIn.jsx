@@ -19,7 +19,7 @@ function CheckIn() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // retrieve data from from dog, record reducer in store
+  // retrieve data from dog, record reducer in store
   const dog = useSelector(store => store.dog);
   const records = useSelector(store => store.record);
 
@@ -54,7 +54,6 @@ function CheckIn() {
     dateToDisplay = <Typography variant="h6" color='#9c27b0' sx={{ mb: 2 }}>{currentDate}</Typography>
     return;
   })
-
 
   // dispatch 'POST_RECORD' with payload of symptom record object and function goToHealthStatus
   const handleSubmit = (event) => {
@@ -93,7 +92,7 @@ function CheckIn() {
         <Grid item xs={10} sm={8.25} md={6} lg={4.5} xl={3.25}>
           <Card elevation={4} sx={{ backgroundColor: "#eaeef1", mb: 4, mt: 4, pb: 2 }}>
             <CardContent>
-              <Typography variant="h6" sx={{ mb: 0, mt: 3 }}>
+              <Typography variant="h6" sx={{ mt: 3 }}>
                 Daily Check-in
               </Typography>
               {dateToDisplay}
