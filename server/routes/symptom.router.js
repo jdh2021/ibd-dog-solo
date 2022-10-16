@@ -3,9 +3,28 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // GET symptom - check dog_id and req.user.id
-router.get('/', (req, res) => {
-  console.log('in /api/symptom GET');
-  // response: array of symptoms
+router.get('/:id', (req, res) => {
+  console.log('in /api/symptom GET by dog id.');
+  console.log('is authenticated?', req.isAuthenticated());
+  console.log('user id is:', req.user.id);
+  console.log('Dog id to get records by is:', req.params.id);
+  if(req.isAuthenticated()){
+    const queryText = `SELECT "symptom"."id", "symptom"."appetite", "symptom"."energy", 
+                      "symptom"."stomach_pain", "symptom"."vomit", "symptom"."diarrhea", 
+                      "symptom"."med_given", "symptom"."score", "symptom"."dog_id" FROM "symptom"
+                      JOIN "dog" on "symptom"."dog_id"="dog"."id"
+                      JOIN "user" on "dog"."user_id"="user"."id"
+                      WHERE "dog"."id" = $1 AND "user"."id" = $2;`;
+    pool.query(queryText, [req.params.id, req.user.id]).then(result => {
+      console.log('/symptom GET success');
+      res.send(result.rows); // array of symptom records
+  }).catch(error => {
+    console.log('Error in GET record(s) by dog_id:', error);
+    res.sendStatus(500);
+  })
+  } else {
+    res.sendStatus(403); // forbidden
+  }
 });
 
 // POST symptom - check dog_id and req.user.id
