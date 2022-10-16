@@ -11,7 +11,8 @@ router.get('/:id', (req, res) => {
   if(req.isAuthenticated()){
     const queryText = `SELECT "symptom"."id", "symptom"."appetite", "symptom"."energy", 
                       "symptom"."stomach_pain", "symptom"."vomit", "symptom"."diarrhea", 
-                      "symptom"."med_given", "symptom"."score", "symptom"."dog_id" FROM "symptom"
+                      "symptom"."med_given", "symptom"."score", "symptom"."created_at",
+                      "symptom"."dog_id" FROM "symptom"
                       JOIN "dog" on "symptom"."dog_id"="dog"."id"
                       JOIN "user" on "dog"."user_id"="user"."id"
                       WHERE "dog"."id" = $1 AND "user"."id" = $2;`;

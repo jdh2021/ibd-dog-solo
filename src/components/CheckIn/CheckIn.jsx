@@ -19,8 +19,9 @@ function CheckIn() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // retrieve data for dog object from reducer in store
+  // retrieve data from from dog, record reducer in store
   const dog = useSelector(store => store.dog);
+  const records = useSelector(store => store.record);
 
   // dispatch action 'FETCH_DOG' when Checkin loads
   useEffect(() => {
@@ -29,7 +30,8 @@ function CheckIn() {
 
   // create date object and formatting for current date
   const date = new Date();
-  let currentDate = `${(date.getMonth() + 1)}.${date.getDate()}.${date.getFullYear().toLocaleString().slice(-2)}`;
+  const currentDate = `${(date.getMonth() + 1)}.${date.getDate()}.${date.getFullYear().toLocaleString().slice(-2)}`;
+  let dateToDisplay = '';
 
   // local state for changeable values of input fields
   const [appetite, setAppetite] = useState('');
@@ -38,6 +40,22 @@ function CheckIn() {
   const [vomit, setVomit] = useState('');
   const [diarrhea, setDiarrhea] = useState('');
   const [medicationStatus, setMedicationStatus] = useState(false);
+
+  // map over records to check if current date equals a record date. if dates match, alert record was already entered. 
+  records.map(symptomRecord => {
+    const historicalRecordDate = new Date(symptomRecord.created_at);
+    const historicalRecordFormattedDate = `${(historicalRecordDate.getMonth() + 1)}.${historicalRecordDate.getDate()}.${historicalRecordDate.getFullYear().toLocaleString().slice(-2)}`;
+    console.log('current date is:', currentDate);
+    console.log('historical record date is:', historicalRecordDate);
+    console.log('formatted historical record date is:', historicalRecordFormattedDate);
+    if (currentDate === historicalRecordFormattedDate) {
+      dateToDisplay = <Typography variant="subtitle1" color='#f57c00' sx={{ mb: 2, mt: 0.5 }}>A record was already added today!</Typography>
+      return;
+    }
+    dateToDisplay = <Typography variant="h6" color='#9c27b0' sx={{ mb: 2 }}>{currentDate}</Typography>
+    return;
+  })
+
 
   // dispatch 'POST_RECORD' with payload of symptom record object and function goToHealthStatus
   const handleSubmit = (event) => {
@@ -74,9 +92,10 @@ function CheckIn() {
         <Grid item xs={10} sm={8.25} md={6} lg={4.5} xl={3.25}>
           <Card elevation={4} sx={{ backgroundColor: "#eaeef1", mb: 4, mt: 4, pb: 2 }}>
             <CardContent>
-              <Typography variant="h6" sx={{ mb: 2, mt: 3 }}>
-                {currentDate} Check-in
+              <Typography variant="h6" sx={{ mb: 0, mt: 3 }}>
+                Daily Check-in
               </Typography>
+              {dateToDisplay}
               <FormControl sx={{ mb: 1 }}>
                 <FormLabel>Appetite</FormLabel>
                 <RadioGroup row value={appetite} onChange={(event) => setAppetite(event.target.value)}>
@@ -143,4 +162,4 @@ function CheckIn() {
   );
 }
 
-  export default CheckIn;
+export default CheckIn;
