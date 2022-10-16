@@ -31,24 +31,25 @@ function HealthStatus() {
           <Table sx={{ backgroundColor: "#eaeef1", p: 3 }} size="small">
             <TableHead>
               <TableRow>
-                <TableCell align="center" sx={{ pt: 0.3, pb: 0.3 }} style={{ width: 10 }}>Date</TableCell>
-                <TableCell align="center" sx={{ pt: 0.3, pb: 0.3 }} style={{ width: 10 }}>Score</TableCell>
-                <TableCell align="center" sx={{ pt: 0.3, pb: 0.3 }} style={{ width: 70 }}>Appetite</TableCell>
-                <TableCell align="center" sx={{ pt: 0.3, pb: 0.3 }} style={{ width: 50 }}>Energy</TableCell>
-                <TableCell align="center" sx={{ pt: 0.3, pb: 0.3 }} style={{ width: 50 }}>Pain</TableCell>
-                <TableCell align="center" sx={{ pt: 0.3, pb: 0.3 }} style={{ width: 70 }}>Vomit</TableCell>
-                <TableCell align="center" sx={{ pt: 0.3, pb: 0.3 }} style={{ width: 70 }}>Diarrhea</TableCell>
-                <TableCell align="center" sx={{ pt: 0.3, pb: 0.3 }} style={{ width: 10 }}>Meds?</TableCell>
-                <TableCell align="center" sx={{ pt: 0.3, pb: 0.3 }} style={{ width: 10 }}>Action</TableCell>
-                <TableCell align="center" sx={{ pt: 0.3, pb: 0.3 }} style={{ width: 10 }}>Action</TableCell>
+                <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 10 }}>Date</TableCell>
+                <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 10 }}>Score</TableCell>
+                <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 80 }}>Appetite</TableCell>
+                <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 50 }}>Energy</TableCell>
+                <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 50 }}>Pain</TableCell>
+                <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 70 }}>Vomit</TableCell>
+                <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 70 }}>Diarrhea</TableCell>
+                <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 10 }}>Meds?</TableCell>
+                <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 10 }}></TableCell>
+                <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 10 }}></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {records.map(symptomRecord => {
-                return < TableRow
+                return <SymptomRecord 
+                  symptomRecord={symptomRecord} 
                   key={symptomRecord.id}
                 />
-              })
+                })
               }
             </TableBody>
           </Table>
