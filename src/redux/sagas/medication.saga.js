@@ -19,8 +19,8 @@ function* postMedication(action) {
   try {
     console.log('medication to post is:', action.payload);
     yield axios.post('/api/medication', action.payload);
-    // after successul POST, dispatch 'FETCH_MEDICATION' with payload of dog id
-    yield put ({ type: 'FETCH_MEDICATION', payload: action.payload.dog_id});
+    // after successul POST, dispatch 'FETCH_DOG' and clear inputs
+    action.handleMedicationPost();
   } catch (error) {
     console.log('Error in postMedication:', error);
     alert('There\'s an error in postMedication.');

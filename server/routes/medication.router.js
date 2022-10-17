@@ -32,7 +32,27 @@ router.get('/:id', (req, res) => {
 // POST medication - check dog_id and req.user.id
 router.post('/', (req, res) => {
   console.log('in /api/medication POST. Medication object to post is:', req.body);
-  // response: 201 - Created
+  console.log('is authenticated?', req.isAuthenticated());
+  console.log('user id is:', req.user.id);
+  if (req.isAuthenticated()) {
+    const queryText = `INSERT INTO "medication" ("name", "dosage", "frequency", "dog_id") 
+                      SELECT $1, $2, $3, $4
+                      WHERE EXISTS (SELECT * FROM "dog"
+                      JOIN "user" on "user"."id"="dog"."user_id"
+                      WHERE "dog"."user_id" = $5 AND "dog"."id" = $6);`;
+    let { name, dosage, frequency, dog_id } = req.body;
+    pool.query(queryText, [name, dosage, frequency, dog_id, req.user.id, dog_id])
+      .then(result => {
+        console.log('/medication POST success');
+        res.sendStatus(201); // Created
+      }).catch(error => {
+        console.log('Error in /api/medication POST:', error);
+        res.sendStatus(500);
+      });
+  } else {
+    // forbidden if not logged in
+    res.sendStatus(403);
+  }
 });
 
 // DELETE medication - check dog_id and req.user.id

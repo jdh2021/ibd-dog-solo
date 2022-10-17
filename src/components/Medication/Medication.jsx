@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -25,7 +25,9 @@ function Medication() {
   const [medicationName, setMedicationName] = useState('');
   const [medicationFrequency, setMedicationFrequency] = useState('');
   const [medicationDosage, setMedicationDosage] = useState('');
+  
 
+  // dispatch POST_MEDICATION, payload is medication object and fucntion handleMedicationPost
   const handleSubmitMedication = (event) => {
     event.preventDefault();
     console.log('in handleSubmitMedication');
@@ -36,11 +38,20 @@ function Medication() {
         name: medicationName,
         dosage: medicationDosage,
         frequency: medicationFrequency
-      }
+      },
+      handleMedicationPost: handleMedicationPost
     })
   }
 
-
+  // dispatches 'FETCH_DOG' and clears inputs upon successful POST
+  const handleMedicationPost = () => {
+    console.log('in handleMedicationPost');
+    dispatch({type: 'FETCH_DOG', payload: dog.id});
+    setMedicationName('');
+    setMedicationFrequency('');
+    setMedicationDosage('');
+  }
+  
 return (
   <div>
     <Grid container spacing={2} justifyContent="center">
