@@ -60,10 +60,25 @@ router.post('/', (req, res) => {
   }
 });
 
-// DELETE symptom - check dog_id and req.user.id
+// DELETE symptom - check req.user.id
 router.delete('/:id', (req, res) => {
-  console.log('in /api/symptom DELETE. Symptom id to delete is:', req.params.id);
-  // response: 200 - OK
+  console.log('in /api/symptom DELETE. Symptom record id to delete is is:', req.params.id);
+  console.log('is authenticated?', req.isAuthenticated());
+  console.log('user id is:', req.user.id);
+  if(req.isAuthenticated()){
+    const queryText = `DELETE FROM "symptom" USING "dog"
+                      WHERE "symptom"."id" = $1 AND "dog"."id"="symptom"."dog_id" 
+                      AND "dog"."user_id" = $2;`;
+    pool.query(queryText, [req.params.id, req.user.id]).then(result => {
+      console.log('/symptom DELETE success');
+      res.sendStatus(200); // OK
+  }).catch(error => {
+    console.log('Error in DELETE record by symptom id:', error);
+    res.sendStatus(500);
+  })
+  } else {
+    res.sendStatus(403); // forbidden
+  }
 });
 
 // PUT symptom - check dog_id and req.user.id

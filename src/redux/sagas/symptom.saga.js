@@ -2,7 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchRecord(action) {
-  // payload is dog object retrieved once 'FETCH_DOG' fires. payload.id is dog id.
+  // payload is dog id
   try {
     console.log('Dog id to retrieve record(s) for is:', action.payload);
     const dogRecord = yield axios.get(`/api/symptom/${action.payload}`);
@@ -15,6 +15,7 @@ function* fetchRecord(action) {
 }
 
 function* postRecord(action) {
+  // payload is symptom record object
   try {
     console.log('symptom record to post is:', action.payload);
     yield axios.post('/api/symptom', action.payload);
@@ -26,9 +27,23 @@ function* postRecord(action) {
   }
 }
 
+function* deleteRecord(action) {
+  // payload is symptom record id
+  try {
+    console.log('symptom record id to delete is', action.payload);
+    yield axios.delete(`/api/symptom/${action.payload}`);
+    // after successful DELETE, dispatch 'FETCH_RECORD'
+    action.handleSymptomRecordDelete();
+  } catch (error) {
+    console.log('Error in deleteRecord:', error);
+    alert('There\'s an error in deleteRecord.');
+  }
+}
+
 function* symptomSaga() {
   yield takeLatest('FETCH_RECORD', fetchRecord);
   yield takeLatest('POST_RECORD', postRecord);
+  yield takeLatest('DELETE_RECORD', deleteRecord);
 }
 
 export default symptomSaga;

@@ -96,28 +96,21 @@ function SymptomRecord({ symptomRecord }) {
   }
 
   // prompt if record should be deleted, takes in id of record clicked on. if confirmed, calls deleteFeedback and passes ID as argument
-  const confirmDelete = (symptomRecord) => {
-    console.log('in confirmDelete. Record id to delete is:', symptomRecord.id);
+  const confirmDelete = (id) => {
+    console.log('in confirmDelete. Record id to delete is:', id);
     if (window.confirm('Do you want to delete this record?')) {
-      deleteSymptomRecord(symptomRecord);
+      deleteSymptomRecord(id);
     }
   }
 
-  // dispatches 'DELETE_RECORD', payload is symptomRecord id, dog_id, function handleSymptomRecordDelete
-  const deleteSymptomRecord = (symptomRecord) => {
-    dispatch({
-      type: 'DELETE_RECORD',
-      payload: {
-        id: symptomRecord.id,
-        dog_id: symptomRecord.dog_id,
-      },
-      handleSymptomRecordDelete: handleSymptomRecordDelete
-    })
+  // dispatches 'DELETE_RECORD', payload is symptomRecord id, function handleSymptomRecordDelete
+  const deleteSymptomRecord = (id) => {
+    dispatch({ type: 'DELETE_RECORD', payload: id, handleSymptomRecordDelete: handleSymptomRecordDelete});
   }
 
   const handleSymptomRecordDelete = () => {
     console.log('in handleSymptomRecordDelete');
-    dispatch({ type: 'FETCH_RECORD' });
+    dispatch({ type: 'FETCH_RECORD', payload: symptomRecord.dog_id});
   }
 
   return (
@@ -140,7 +133,7 @@ function SymptomRecord({ symptomRecord }) {
         </IconButton>
       </TableCell>
       <TableCell align="center" sx={{ p: 0.2 }}>
-        <IconButton sx={{ color: "#9c27b0" }} onClick={() => confirmDelete(symptomRecord)}>
+        <IconButton sx={{ color: "#9c27b0" }} onClick={() => confirmDelete(symptomRecord.id)}>
           <FontAwesomeIcon icon={faTrash} size="xs" />
         </IconButton>
       </TableCell>

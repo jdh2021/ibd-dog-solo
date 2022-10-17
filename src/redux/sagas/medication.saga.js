@@ -1,9 +1,8 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-// fired on 'FETCH_MEDCIATION' action
 function* fetchMedication(action) {
-  // payload is dog object retrieved once 'FETCH_DOG' fires. payload.id is dog id.
+  // payload is dog id
   try {
     console.log('Dog id to retrieve medication for is:', action.payload);
     const dogMedication = yield axios.get(`/api/medication/${action.payload}`);

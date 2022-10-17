@@ -1,7 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-// fired on 'FETCH_DOG' action
 function* fetchDog() {
   try {
     const userDog = yield axios.get('/api/dog');
@@ -18,6 +17,7 @@ function* fetchDog() {
 }
 
 function* putDog(action) {
+  // payload is dog object
   try {
     console.log('dog object to update is:', action.payload);
     yield axios.put('/api/dog', action.payload);
