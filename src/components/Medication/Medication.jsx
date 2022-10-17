@@ -70,6 +70,24 @@ function Medication() {
     setMedicationDosage('');
   }
 
+  // prompt if medication should be deleted, takes in id of medication clicked on. if confirmed, calls deleteMedication and passes id as argument
+  const confirmDelete = (id) => {
+    console.log('in confirmDelete. Record id to delete is:', id);
+    if (window.confirm('Do you want to delete this record?')) {
+      deleteMedication(id);
+    }
+  }
+
+  // dispatches 'DELETE_MEDICATION', payload is medication id, function handleMedicationDelete
+  const deleteMedication = (id) => {
+    dispatch({ type: 'DELETE_MEDICATION', payload: id, handleMedicationDelete: handleMedicationDelete});
+  }
+
+  const handleMedicationDelete = () => {
+    console.log('in handleMedicationDelete');
+    dispatch({ type: 'FETCH_MEDICATION', payload: dog.id});
+  }
+
   return (
     <div>
       <Grid container spacing={2} justifyContent="center">
@@ -143,7 +161,7 @@ function Medication() {
                       />
                     </TableCell>
                     <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>
-                      <IconButton sx={{ color: "#9c27b0" }}>
+                      <IconButton sx={{ color: "#9c27b0" }} onClick={() => confirmDelete(medication.id)}>
                         <FontAwesomeIcon icon={faTrash} size="xs" />
                       </IconButton>
                     </TableCell>

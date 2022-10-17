@@ -27,9 +27,23 @@ function* postMedication(action) {
   }
 }
 
+function* deleteMedication(action) {
+  // payload is medication id
+  try {
+    console.log('medication id to delete is', action.payload);
+    yield axios.delete(`/api/medication/${action.payload}`);
+    // after successful DELETE, dispatch 'FETCH_RECORD'
+    action.handleMedicationDelete();
+  } catch (error) {
+    console.log('Error in deleteMedication:', error);
+    alert('There\'s an error in deleteMedication.');
+  }
+}
+
 function* medicationSaga() {
   yield takeLatest('FETCH_MEDICATION', fetchMedication);
   yield takeLatest('POST_MEDICATION', postMedication);
+  yield takeLatest('DELETE_MEDICATION', deleteMedication);
 }
 
 export default medicationSaga;
