@@ -14,8 +14,22 @@ function* fetchMedication(action) {
   }
 }
 
+function* postMedication(action) {
+  // payload is medication object
+  try {
+    console.log('medication to post is:', action.payload);
+    yield axios.post('/api/medication', action.payload);
+    // after successul POST, dispatch 'FETCH_MEDICATION' with payload of dog id
+    yield put ({ type: 'FETCH_MEDICATION', payload: action.payload.dog_id});
+  } catch (error) {
+    console.log('Error in postMedication:', error);
+    alert('There\'s an error in postMedication.');
+  }
+}
+
 function* medicationSaga() {
   yield takeLatest('FETCH_MEDICATION', fetchMedication);
+  yield takeLatest('POST_MEDICATION', postMedication);
 }
 
 export default medicationSaga;
