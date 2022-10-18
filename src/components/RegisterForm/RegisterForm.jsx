@@ -95,7 +95,7 @@ function RegisterForm() {
               disableFuture
               label="dog's birthday (est.) *"
               openTo="day"
-              views={['day']}
+              views={['year', 'month', 'day']}
             />
           </Stack>
         </CardContent>

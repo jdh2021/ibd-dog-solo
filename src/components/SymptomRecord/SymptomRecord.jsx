@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import './SymptomRecord.css';
 
 // material ui imports
 import Checkbox from '@mui/material/Checkbox';
@@ -14,7 +15,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 function SymptomRecord({ symptomRecord }) {
   const dispatch = useDispatch();
 
-  // formatting date object of symptom record to display YY.MM.DD
+  // formatting date object of symptom record to display MM.DD.YY
   const date = new Date(symptomRecord.created_at);
   const dateDisplay = `${(date.getMonth() + 1)}.${date.getDate()}.${date.getFullYear().toLocaleString().slice(-2)}`;
 
@@ -95,6 +96,22 @@ function SymptomRecord({ symptomRecord }) {
       diarrheaDisplay;
   }
 
+  // conditional formatting for background color of score column by symptom record score
+  let HealthColor = '';
+  if (symptomRecord.score <= 5) {
+    HealthColor = "green";
+  } else if (symptomRecord.score > 5 && symptomRecord.score <= 10) {
+    HealthColor = "Yellow-green";
+  } else if (symptomRecord.score > 10 && symptomRecord.score <= 15) {
+    HealthColor = "Light-orange";
+  } else if (symptomRecord.score > 15 && symptomRecord.score <= 20) {
+    HealthColor = "orange";
+  } else if (symptomRecord.score > 20 && symptomRecord.score <= 25) {
+    HealthColor = "pink";
+  } else if (symptomRecord.score > 25) {
+    HealthColor = "red";
+  }
+
   // prompt if record should be deleted, takes in id of record clicked on. if confirmed, calls deleteFeedback and passes ID as argument
   const confirmDelete = (id) => {
     console.log('in confirmDelete. Record id to delete is:', id);
@@ -105,18 +122,18 @@ function SymptomRecord({ symptomRecord }) {
 
   // dispatches 'DELETE_RECORD', payload is symptomRecord id, function handleSymptomRecordDelete
   const deleteSymptomRecord = (id) => {
-    dispatch({ type: 'DELETE_RECORD', payload: id, handleSymptomRecordDelete: handleSymptomRecordDelete});
+    dispatch({ type: 'DELETE_RECORD', payload: id, handleSymptomRecordDelete: handleSymptomRecordDelete });
   }
 
   const handleSymptomRecordDelete = () => {
     console.log('in handleSymptomRecordDelete');
-    dispatch({ type: 'FETCH_RECORD', payload: symptomRecord.dog_id});
+    dispatch({ type: 'FETCH_RECORD', payload: symptomRecord.dog_id });
   }
 
   return (
     <TableRow key={symptomRecord.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
       <TableCell component="th" scope="row" align="center" sx={{ p: 0.2 }}>{dateDisplay}</TableCell>
-      <TableCell align="center" sx={{ p: 0.2 }}>{symptomRecord.score}</TableCell>
+      <TableCell align="center" sx={{ p: 0.2, fontWeight: '600' }} className={HealthColor}>{symptomRecord.score}</TableCell>
       <TableCell align="center" sx={{ p: 0.2 }}>{appetiteDisplay}</TableCell>
       <TableCell align="center" sx={{ p: 0.2 }}>{energyDisplay}</TableCell>
       <TableCell align="center" sx={{ p: 0.2 }}>{stomachPainDisplay}</TableCell>

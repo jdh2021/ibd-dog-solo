@@ -28,7 +28,7 @@ function CheckIn() {
     dispatch({ type: 'FETCH_DOG' });
   }, []);
 
-  // creating date object and formatting current date YY.MM.DD
+  // creating date object and formatting current date MM.DD.YY
   const date = new Date();
   const currentDate = `${(date.getMonth() + 1)}.${date.getDate()}.${date.getFullYear().toLocaleString().slice(-2)}`;
   let recordPreviouslyEntered = false;
