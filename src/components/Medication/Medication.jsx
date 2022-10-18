@@ -78,14 +78,26 @@ function Medication() {
     }
   }
 
-  // dispatches 'DELETE_MEDICATION', payload is medication id, function handleMedicationDelete
+  // dispatches 'DELETE_MEDICATION', payload is medication id, function handleMedicationChange
   const deleteMedication = (id) => {
-    dispatch({ type: 'DELETE_MEDICATION', payload: id, handleMedicationDelete: handleMedicationDelete});
+    dispatch({ type: 'DELETE_MEDICATION', payload: id, handleMedicationChange: handleMedicationChange });
   }
 
-  const handleMedicationDelete = () => {
-    console.log('in handleMedicationDelete');
-    dispatch({ type: 'FETCH_MEDICATION', payload: dog.id});
+  const handleMedicationChange = () => {
+    console.log('in handleMedicationChange');
+    dispatch({ type: 'FETCH_MEDICATION', payload: dog.id });
+  }
+
+  // dispatches 'PUT_MEDICATION', payload is medication object with id and dog id
+  const editMedicationStatus = (medication) => {
+    console.log('in editMedicationStatus');
+    dispatch({
+      type: 'PUT_MEDICATION',
+      payload: {
+        id: medication.id,
+        dog_id: medication.dog_id
+      }
+    })
   }
 
   return (
@@ -158,6 +170,7 @@ function Medication() {
                     <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>
                       <Checkbox
                         checked={medication.active}
+                        onChange={() => editMedicationStatus(medication)}
                       />
                     </TableCell>
                     <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>
