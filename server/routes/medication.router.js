@@ -8,7 +8,7 @@ router.get('/:id', (req, res) => {
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user id is:', req.user.id);
   console.log('Dog id to get medications by is:', req.params.id);
-  if(req.isAuthenticated()){
+  if (req.isAuthenticated()) {
     const queryText = `SELECT "medication"."id", "medication"."name", 
                       "medication"."frequency", "medication"."dosage", 
                       "medication"."active", "medication"."created_at", "medication"."dog_id" FROM "medication" 
@@ -19,15 +19,14 @@ router.get('/:id', (req, res) => {
     pool.query(queryText, [req.params.id, req.user.id]).then(result => {
       console.log('/medication GET success');
       res.send(result.rows); // array of medications
-  }).catch(error => {
-    console.log('Error in GET medication by dog_id:', error);
-    res.sendStatus(500);
-  })
+    }).catch(error => {
+      console.log('Error in GET medication by dog_id:', error);
+      res.sendStatus(500);
+    })
   } else {
     res.sendStatus(403); // forbidden
   }
 });
-
 
 // POST medication - check dog_id and req.user.id
 router.post('/', (req, res) => {
@@ -55,10 +54,25 @@ router.post('/', (req, res) => {
   }
 });
 
-// DELETE medication - check dog_id and req.user.id
+// DELETE medication - check req.user.id
 router.delete('/:id', (req, res) => {
   console.log('in /api/medication DELETE by id. Medication id to delete is:', req.params.id);
-  // response: 200 - OK
+  console.log('is authenticated?', req.isAuthenticated());
+  console.log('user id is:', req.user.id);
+  if (req.isAuthenticated()) {
+    const queryText = `DELETE FROM "medication" USING "dog"
+                      WHERE "medication"."id" = $1 AND "dog"."id"="medication"."dog_id" 
+                      AND "dog"."user_id" = $2;`;
+    pool.query(queryText, [req.params.id, req.user.id]).then(result => {
+      console.log('/medication DELETE success');
+      res.sendStatus(200); // OK
+    }).catch(error => {
+      console.log('Error in DELETE medication by medication id:', error);
+      res.sendStatus(500);
+    })
+  } else {
+    res.sendStatus(403); // forbidden
+  }
 });
 
 // PUT medication - check dog_id and req.user.id
