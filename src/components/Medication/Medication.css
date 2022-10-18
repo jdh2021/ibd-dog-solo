@@ -1,0 +1,8 @@
+.Active-row {
+    background-color: #eaeef1;
+}
+
+.Inactive-row {
+    background-color: #eaeef1;
+    opacity: 0.5;
+}

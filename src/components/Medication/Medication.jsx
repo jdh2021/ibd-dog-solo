@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import './Medication.css';
 
 // material ui imports
 import Button from '@mui/material/Button';
@@ -155,9 +156,16 @@ function Medication() {
               </TableHead>
               <TableBody>
                 {medications.map(medication => {
+                  let medicationStatus = '';
+                  if (medication.active) {
+                    medicationStatus = 'Active-row'
+                  } else {
+                    medicationStatus = 'Inactive-row'
+                  }
                   return <TableRow
                     key={medication.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    className={medicationStatus}
                   >
                     <TableCell component="th" scope="row" align="center" sx={{ pt: 0.2, pb: 0.2 }}>
                       {medication.name}
