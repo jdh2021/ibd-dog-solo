@@ -41,10 +41,10 @@ function* deleteMedication(action) {
 }
 
 function* putMedication(action) {
-  // payload is medication object
+  // payload is medication id
   try {
-    console.log('medication to update is', action.payload);
-    yield axios.put('/api/medication', action.payload);
+    console.log('medication id to update is', action.payload);
+    yield axios.put(`/api/medication/${action.payload}`);
     // after successful PUT, dispatch 'FETCH_MEDICATION'
     action.handleMedicationChange();
   } catch (error) {

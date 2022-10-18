@@ -54,7 +54,7 @@ router.post('/', (req, res) => {
   }
 });
 
-// DELETE medication - check req.user.id
+// DELETE medication - check dog id, req.user.id
 router.delete('/:id', (req, res) => {
   console.log('in /api/medication DELETE by id. Medication id to delete is:', req.params.id);
   console.log('is authenticated?', req.isAuthenticated());
@@ -75,10 +75,26 @@ router.delete('/:id', (req, res) => {
   }
 });
 
-// PUT medication - check dog_id and req.user.id
+// PUT medication - check dog id, req.user.id
 router.put('/:id', (req, res) => {
   console.log('in /api/medication PUT by id. Medication id to update is:', req.params.id);
-  // response: 200 - OK
+  console.log('is authenticated?', req.isAuthenticated());
+  console.log('user id is:', req.user.id);
+  if (req.isAuthenticated()) {
+    const queryText = `UPDATE "medication"
+                      SET "active" = NOT active
+                      FROM "dog" 
+                      WHERE "dog"."id"="medication"."dog_id" AND "medication"."id"= $1 AND "dog"."user_id"= $2;`;
+    pool.query(queryText, [req.params.id, req.user.id]).then(result => {
+      console.log('/medication PUT success');
+      res.sendStatus(200); // OK
+    }).catch(error => {
+      console.log('Error in PUT medication by medication id:', error);
+      res.sendStatus(500);
+    })
+  } else {
+    res.sendStatus(403); // forbidden
+  }
 });
 
 module.exports = router;
