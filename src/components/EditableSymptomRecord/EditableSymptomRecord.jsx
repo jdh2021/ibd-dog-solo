@@ -24,14 +24,35 @@ function EditableSymptomRecord({ symptomRecord, setEditSymptomRecordId }) {
   const [stomach_pain, setStomachPain] = useState(symptomRecord.stomach_pain);
   const [vomit, setVomit] = useState(symptomRecord.vomit);
   const [diarrhea, setDiarrhea] = useState(symptomRecord.diarrhea);
-  const [medication, setMedication] = useState(symptomRecord.med_given);
+  const [medicationGiven, setMedicationGiven] = useState(symptomRecord.med_given);
 
   // formatting date object of symptom record to display MM.DD.YY
   const date = new Date(symptomRecord.created_at);
   const dateDisplay = `${(date.getMonth() + 1)}.${date.getDate()}.${date.getFullYear().toLocaleString().slice(-2)}`;
 
-  const handleEditSave = () => {
+  // dispatch 'PUT_RECORD' with payload of updated symptom record object, function handleEditRecord success
+  const handleEditRecordSave = (event) => {
+    event.preventDefault()
     console.log('in handleEditSave');
+    dispatch({
+      type: 'PUT_RECORD',
+      payload: {
+        id: symptomRecord.id,
+        appetite: appetite,
+        energy: energy,
+        stomach_pain: stomach_pain,
+        vomit: vomit,
+        diarrhea: diarrhea,
+        med_given: medicationGiven
+      },
+      handleEditRecordSuccess: handleEditRecordSuccess
+    })
+  }
+
+  // upon successful PUT, setEditSymptomRecordId back to null so SymptomRecord component renders
+  const handleEditRecordSuccess = () => {
+    setEditSymptomRecordId(null);
+    dispatch({ type: 'FETCH_RECORD' });
   }
 
   return (
@@ -107,14 +128,14 @@ function EditableSymptomRecord({ symptomRecord, setEditSymptomRecordId }) {
       <TableCell align="center" sx={{ p: 0.2 }}>
         <FormControl>
           <Checkbox
-            checked={medication}
-            onChange={() => setMedication(!medication)}
+            checked={medicationGiven}
+            onChange={() => setMedicationGiven(!medicationGiven)}
           />
         </FormControl>
       </TableCell>
       <TableCell align="center" sx={{ p: 0.2 }}>
         <FormControl>
-          <IconButton color="primary" onClick={handleEditSave}>
+          <IconButton color="primary" onClick={handleEditRecordSave}>
             <FontAwesomeIcon icon={faFloppyDisk} size="xs" />
           </IconButton>
         </FormControl>

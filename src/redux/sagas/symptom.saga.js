@@ -40,10 +40,25 @@ function* deleteRecord(action) {
   }
 }
 
+function* putRecord(action) {
+  // payload is symptom record object
+  try {
+    console.log('symptom record to update is', action.payload);
+    yield axios.put('/api/symptom', action.payload);
+    // after successful PUT, dispatch 'FETCH_RECORD'
+    action.handleEditRecordSuccess();
+  } catch (error) {
+    console.log('Error in putRecord:', error);
+    alert('There\'s an error in putRecord.');
+  }
+}
+
+
 function* symptomSaga() {
   yield takeLatest('FETCH_RECORD', fetchRecord);
   yield takeLatest('POST_RECORD', postRecord);
   yield takeLatest('DELETE_RECORD', deleteRecord);
+  yield takeLatest('PUT_RECORD', putRecord);
 }
 
 export default symptomSaga;
