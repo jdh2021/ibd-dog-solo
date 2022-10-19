@@ -140,9 +140,7 @@ function SymptomRecord({ symptomRecord, handleEdit }) {
       <TableCell align="center" sx={{ p: 0.2 }}>{vomitDisplay}</TableCell>
       <TableCell align="center" sx={{ p: 0.2 }}>{diarrheaDisplay}</TableCell>
       <TableCell align="center" sx={{ p: 0.2 }}>
-        {symptomRecord.med_given ?
-          <Checkbox disabled checked /> : <Checkbox disabled />
-        }
+        <Checkbox disabled checked={symptomRecord.med_given} />
       </TableCell>
       <TableCell align="center" sx={{ p: 0.2 }}>
         <IconButton sx={{ color: "#9c27b0" }} onClick={() => handleEdit(symptomRecord.id)}>

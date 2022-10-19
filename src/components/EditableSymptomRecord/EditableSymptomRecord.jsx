@@ -24,7 +24,7 @@ function EditableSymptomRecord({ symptomRecord, setEditSymptomRecordId }) {
   const [stomach_pain, setStomachPain] = useState(symptomRecord.stomach_pain);
   const [vomit, setVomit] = useState(symptomRecord.vomit);
   const [diarrhea, setDiarrhea] = useState(symptomRecord.diarrhea);
-  const [medication, setMedication] = useState(symptomRecord.medication);
+  const [medication, setMedication] = useState(symptomRecord.med_given);
 
   // formatting date object of symptom record to display MM.DD.YY
   const date = new Date(symptomRecord.created_at);
@@ -37,7 +37,7 @@ function EditableSymptomRecord({ symptomRecord, setEditSymptomRecordId }) {
   return (
     <TableRow key={symptomRecord.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
       <TableCell component="th" scope="row" align="center" sx={{ p: 0.2 }}>{dateDisplay}</TableCell>
-      <TableCell align="center" sx={{ p: 0.2, fontWeight: '600' }}>{symptomRecord.score}</TableCell>
+      <TableCell align="center" sx={{ p: 0.2 }}>{symptomRecord.score}</TableCell>
       <TableCell align="center" sx={{ p: 0.2 }}>
         <FormControl size="small">
           <Select
@@ -108,7 +108,7 @@ function EditableSymptomRecord({ symptomRecord, setEditSymptomRecordId }) {
         <FormControl>
           <Checkbox
             checked={medication}
-            onChange={(event) => setMedication(event.target.value)}
+            onChange={() => setMedication(!medication)}
           />
         </FormControl>
       </TableCell>
