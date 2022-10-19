@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-function SymptomRecord({ symptomRecord }) {
+function SymptomRecord({ symptomRecord, handleEdit }) {
   const dispatch = useDispatch();
 
   // formatting date object of symptom record to display MM.DD.YY
@@ -145,7 +145,7 @@ function SymptomRecord({ symptomRecord }) {
         }
       </TableCell>
       <TableCell align="center" sx={{ p: 0.2 }}>
-        <IconButton sx={{ color: "#9c27b0" }}>
+        <IconButton sx={{ color: "#9c27b0" }} onClick={() => handleEdit(symptomRecord.id)}>
           <FontAwesomeIcon icon={faPenToSquare} size="xs" />
         </IconButton>
       </TableCell>

@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import EditableSymptomRecord from '../EditableSymptomRecord/EditableSymptomRecord';
 import SymptomRecord from '../SymptomRecord/SymptomRecord';
 
 import Grid from '@mui/material/Grid';
@@ -23,6 +24,15 @@ function HealthStatus() {
   useEffect(() => {
     dispatch({ type: 'FETCH_DOG' });
   }, []);
+
+  // local state for changeable value of symptom record id being edited
+  const [editSymptomRecordId, setEditSymptomRecordId] = useState(null);
+
+  // when edit button clicked in SymptomRecord, sets symptom record id to edit
+  const handleEdit = (id) => {
+    console.log('in handleEdit. symptom record id to edit is:', id);
+    setEditSymptomRecordId(id);
+  }
 
   // table pagination
   const [page, setPage] = useState(0);
@@ -61,12 +71,20 @@ function HealthStatus() {
               {records
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(symptomRecord => {
-                  return <SymptomRecord
-                    symptomRecord={symptomRecord}
-                    key={symptomRecord.id}
-                  />
-                })
-              }
+                  return <Fragment key={symptomRecord.id}>
+                    {editSymptomRecordId === symptomRecord.id ?
+                      <EditableSymptomRecord
+                        symptomRecord={symptomRecord}
+                        key={symptomRecord.id}
+                      /> :
+                      <SymptomRecord
+                        symptomRecord={symptomRecord}
+                        key={symptomRecord.id}
+                        handleEdit={handleEdit}
+                      />
+                    }
+                  </Fragment>
+                })}
             </TableBody>
           </Table>
           <TablePagination
