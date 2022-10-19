@@ -57,7 +57,7 @@ function HealthStatus() {
               <TableRow>
                 <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 10 }}>Date</TableCell>
                 <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 10 }}>Score</TableCell>
-                <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 80 }}>Appetite</TableCell>
+                <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 50 }}>Appetite</TableCell>
                 <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 50 }}>Energy</TableCell>
                 <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 50 }}>Pain</TableCell>
                 <TableCell align="center" sx={{ pt: 0.5, pb: 0.5 }} style={{ minWidth: 70 }}>Vomit</TableCell>
@@ -76,6 +76,7 @@ function HealthStatus() {
                       <EditableSymptomRecord
                         symptomRecord={symptomRecord}
                         key={symptomRecord.id}
+                        setEditSymptomRecordId={setEditSymptomRecordId}
                       /> :
                       <SymptomRecord
                         symptomRecord={symptomRecord}

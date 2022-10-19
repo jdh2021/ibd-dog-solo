@@ -10,7 +10,12 @@ import Select from '@mui/material/Select';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
-function EditableSymptomRecord({ symptomRecord }) {
+// fontawesome icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+
+function EditableSymptomRecord({ symptomRecord, setEditSymptomRecordId }) {
   const dispatch = useDispatch();
 
   // local state for changeable values of input fields
@@ -25,11 +30,15 @@ function EditableSymptomRecord({ symptomRecord }) {
   const date = new Date(symptomRecord.created_at);
   const dateDisplay = `${(date.getMonth() + 1)}.${date.getDate()}.${date.getFullYear().toLocaleString().slice(-2)}`;
 
+  const handleEditSave = () => {
+    console.log('in handleEditSave');
+  }
+
   return (
     <TableRow key={symptomRecord.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-      <TableCell component="th" scope="row" align="center">{dateDisplay}</TableCell>
-      <TableCell align="center">{symptomRecord.score}</TableCell>
-      <TableCell align="center">
+      <TableCell component="th" scope="row" align="center" sx={{ p: 0.2 }}>{dateDisplay}</TableCell>
+      <TableCell align="center" sx={{ p: 0.2, fontWeight: '600' }}>{symptomRecord.score}</TableCell>
+      <TableCell align="center" sx={{ p: 0.2 }}>
         <FormControl size="small">
           <Select
             value={appetite}
@@ -43,7 +52,7 @@ function EditableSymptomRecord({ symptomRecord }) {
           </Select>
         </FormControl>
       </TableCell>
-      <TableCell align="center">
+      <TableCell align="center" sx={{ p: 0.2 }}>
         <FormControl size="small">
           <Select
             value={energy}
@@ -56,7 +65,7 @@ function EditableSymptomRecord({ symptomRecord }) {
           </Select>
         </FormControl>
       </TableCell>
-      <TableCell align="center">
+      <TableCell align="center" sx={{ p: 0.2 }}>
         <FormControl size="small">
           <Select
             value={stomach_pain}
@@ -69,7 +78,7 @@ function EditableSymptomRecord({ symptomRecord }) {
           </Select>
         </FormControl>
       </TableCell>
-      <TableCell align="center">
+      <TableCell align="center" sx={{ p: 0.2 }}>
         <FormControl size="small">
           <Select
             value={vomit}
@@ -82,7 +91,7 @@ function EditableSymptomRecord({ symptomRecord }) {
           </Select>
         </FormControl>
       </TableCell>
-      <TableCell align="center">
+      <TableCell align="center" sx={{ p: 0.2 }}>
         <FormControl size="small" sx={{ m: 0 }}>
           <Select
             value={diarrhea}
@@ -95,7 +104,7 @@ function EditableSymptomRecord({ symptomRecord }) {
           </Select>
         </FormControl>
       </TableCell>
-      <TableCell align="center">
+      <TableCell align="center" sx={{ p: 0.2 }}>
         <FormControl>
           <Checkbox
             checked={medication}
@@ -103,17 +112,17 @@ function EditableSymptomRecord({ symptomRecord }) {
           />
         </FormControl>
       </TableCell>
-      <TableCell align="center">
+      <TableCell align="center" sx={{ p: 0.2 }}>
         <FormControl>
-          <IconButton color="primary">
-            Save
+          <IconButton color="primary" onClick={handleEditSave}>
+            <FontAwesomeIcon icon={faFloppyDisk} size="xs" />
           </IconButton>
         </FormControl>
       </TableCell>
-      <TableCell align="center">
+      <TableCell align="center" sx={{ p: 0.2 }}>
         <FormControl>
-          <IconButton color="primary">
-            Cancel
+          <IconButton color="primary" onClick={() => setEditSymptomRecordId(null)}>
+            <FontAwesomeIcon icon={faCircleXmark} size="xs" />
           </IconButton>
         </FormControl>
       </TableCell>
