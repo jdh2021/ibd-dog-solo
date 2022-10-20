@@ -52,7 +52,7 @@ function EditableSymptomRecord({ symptomRecord, setEditSymptomRecordId }) {
   // upon successful PUT, setEditSymptomRecordId back to null so SymptomRecord component renders
   const handleEditRecordSuccess = () => {
     setEditSymptomRecordId(null);
-    dispatch({ type: 'FETCH_RECORD' });
+    dispatch({ type: 'FETCH_RECORD', payload: symptomRecord.dog_id });
   }
 
   return (
@@ -129,7 +129,7 @@ function EditableSymptomRecord({ symptomRecord, setEditSymptomRecordId }) {
         <FormControl>
           <Checkbox
             checked={medicationGiven}
-            onChange={() => setMedicationGiven(!medicationGiven)}
+            onChange={(event) => setMedicationGiven(!medicationGiven)}
           />
         </FormControl>
       </TableCell>

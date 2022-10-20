@@ -8,7 +8,7 @@ router.get('/:id', (req, res) => {
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user id is:', req.user.id);
   console.log('Dog id to get records by is:', req.params.id);
-  if(req.isAuthenticated()){
+  if (req.isAuthenticated()) {
     const queryText = `SELECT "symptom"."id", "symptom"."appetite", "symptom"."energy", 
                       "symptom"."stomach_pain", "symptom"."vomit", "symptom"."diarrhea", 
                       "symptom"."med_given", "symptom"."score", "symptom"."created_at",
@@ -20,10 +20,10 @@ router.get('/:id', (req, res) => {
     pool.query(queryText, [req.params.id, req.user.id]).then(result => {
       console.log('/symptom GET success');
       res.send(result.rows); // array of symptom records
-  }).catch(error => {
-    console.log('Error in GET record(s) by dog_id:', error);
-    res.sendStatus(500);
-  })
+    }).catch(error => {
+      console.log('Error in GET record(s) by dog_id:', error);
+      res.sendStatus(500);
+    })
   } else {
     res.sendStatus(403); // forbidden
   }
@@ -35,8 +35,8 @@ router.post('/', (req, res) => {
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user id is:', req.user.id);
   // convert values from CheckIn to numbers and add to get health score
-  req.body.score =  Number(req.body.appetite) + Number(req.body.energy) + Number(req.body.stomach_pain) + 
-                    Number(req.body.vomit) + Number(req.body.diarrhea);
+  req.body.score = Number(req.body.appetite) + Number(req.body.energy) + Number(req.body.stomach_pain) +
+    Number(req.body.vomit) + Number(req.body.diarrhea);
   console.log('Score is:', req.body.score);
   if (req.isAuthenticated()) {
     const queryText = `INSERT INTO "symptom" ("appetite", "energy", "stomach_pain", "vomit", 
@@ -65,17 +65,17 @@ router.delete('/:id', (req, res) => {
   console.log('in /api/symptom DELETE. Symptom record id to delete is is:', req.params.id);
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user id is:', req.user.id);
-  if(req.isAuthenticated()){
+  if (req.isAuthenticated()) {
     const queryText = `DELETE FROM "symptom" USING "dog"
                       WHERE "symptom"."id" = $1 AND "dog"."id"="symptom"."dog_id" 
                       AND "dog"."user_id" = $2;`;
     pool.query(queryText, [req.params.id, req.user.id]).then(result => {
       console.log('/symptom DELETE success');
       res.sendStatus(200); // OK
-  }).catch(error => {
-    console.log('Error in DELETE record by symptom id:', error);
-    res.sendStatus(500);
-  })
+    }).catch(error => {
+      console.log('Error in DELETE record by symptom id:', error);
+      res.sendStatus(500);
+    })
   } else {
     res.sendStatus(403); // forbidden
   }
@@ -84,7 +84,31 @@ router.delete('/:id', (req, res) => {
 // PUT symptom - check dog_id and req.user.id
 router.put('/', (req, res) => {
   console.log('in /api/symptom PUT. Symptom object to update is:', req.body);
-  // response: 200 - OK
+  console.log('is authenticated?', req.isAuthenticated());
+  console.log('user id is:', req.user.id);
+  req.body.score = Number(req.body.appetite) +
+    Number(req.body.energy) +
+    Number(req.body.stomach_pain) +
+    Number(req.body.vomit) +
+    Number(req.body.diarrhea);
+  console.log('Updated score is:', req.body.score);
+  if (req.isAuthenticated()) {
+    const queryText = `UPDATE "symptom"
+                      SET "appetite" = $1, "energy" = $2, "stomach_pain" = $3, "vomit" = $4,
+                      "diarrhea" = $5, "med_given" = $6, "score" = $7
+                      FROM "dog" 
+                      WHERE "dog"."id"="symptom"."dog_id" AND "symptom"."id"= $8 AND "dog"."user_id"= $9;`;
+    let { appetite, energy, stomach_pain, vomit, diarrhea, med_given, score, id } = req.body;
+    pool.query(queryText, [appetite, energy, stomach_pain, vomit, diarrhea, med_given, score, id, req.user.id]).then(result => {
+      console.log('/PUT symptom record by symptom_id success');
+      res.sendStatus(200);
+    }).catch(error => {
+      console.log('Error in PUT symptom record:', error);
+      res.sendStatus(500);
+    })
+  } else {
+    res.sendStatus(403); // forbidden
+  }
 });
 
 module.exports = router;

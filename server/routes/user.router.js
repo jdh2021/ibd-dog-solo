@@ -24,6 +24,7 @@ router.post('/register', async (req, res, next) => {
   const dogName = req.body.name;
   const dogBirthday = req.body.birthday;
   try {
+    await client.query('BEGIN');
     const queryText = `INSERT INTO "user" (username, password)
                       VALUES ($1, $2) RETURNING "id";`;
     let response = await pool.query(queryText, [username, password])

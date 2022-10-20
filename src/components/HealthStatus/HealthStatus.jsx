@@ -49,7 +49,7 @@ function HealthStatus() {
 
   return (
     <Grid container justifyContent="center">
-      <Grid item xs={11.75} sm={11.75} md={11.25} lg={10.75} xl={9.5}>
+      <Grid item xs={11.75} sm={11.75} md={10.5} lg={8.25} xl={7}>
         <TableContainer component={Paper} sx={{ mt: 4, mb: 5, backgroundColor: "#d6dde3" }}>
           <Typography sx={{ mt: 3, mb: 2 }} variant="h6">Check-in Records</Typography>
           <Table sx={{ backgroundColor: "#eaeef1", p: 3 }} size="small">
