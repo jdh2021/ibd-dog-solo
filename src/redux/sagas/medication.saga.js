@@ -1,6 +1,9 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
+// sweetalert
+import swal from 'sweetalert';
+
 function* fetchMedication(action) {
   // payload is dog id
   try {
@@ -10,7 +13,7 @@ function* fetchMedication(action) {
     yield put({ type: 'SET_MEDICATION', payload: dogMedication.data });
   } catch (error) {
     console.log('Error in fetchMedication by dog');
-    alert('There\'s an error in fetchMedication by dog.');
+    swal('There\'s an error in fetchMedication by dog.');
   }
 }
 
@@ -23,7 +26,7 @@ function* postMedication(action) {
     action.handleMedicationPost();
   } catch (error) {
     console.log('Error in postMedication:', error);
-    alert('There\'s an error in postMedication.');
+    swal('There\'s an error in postMedication.');
   }
 }
 
@@ -36,7 +39,7 @@ function* deleteMedication(action) {
     action.handleMedicationChange();
   } catch (error) {
     console.log('Error in deleteMedication:', error);
-    alert('There\'s an error in deleteMedication.');
+    swal('There\'s an error in deleteMedication.');
   }
 }
 
@@ -49,7 +52,7 @@ function* putMedication(action) {
     action.handleMedicationChange();
   } catch (error) {
     console.log('Error in putMedication:', error);
-    alert('There\'s an error in putMedication.');
+    swal('There\'s an error in putMedication.');
   }
 }
 

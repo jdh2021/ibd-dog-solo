@@ -12,6 +12,9 @@ import Typography from '@mui/material/Typography';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 
+// sweetalert
+import swal from 'sweetalert';
+
 function EditDog({ setEditDog }) {
   const dispatch = useDispatch();
 
@@ -34,8 +37,8 @@ function EditDog({ setEditDog }) {
     event.preventDefault();
     console.log('in handleEditSave');
     const formattedEditBirthday = dayjs(editDogBirthday).format('YYYY-MM-DD');
-    if (editDogName === '' || editDogBirthday === '') {
-      alert('Please update your dog\'s name and birthday.');
+    if (editDogName === '' || editDogBirthday === null ) {
+      swal('Please update your dog\'s name and birthday.');
       return;
     } else {
       dispatch({

@@ -15,6 +15,9 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
 
+// sweetalert
+import swal from 'sweetalert';
+
 function CheckIn() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -55,7 +58,7 @@ function CheckIn() {
     event.preventDefault();
     console.log('in handleSubmit');
     if (appetite === '' || energy === '' || stomachPain === '' || vomit === '' || diarrhea === '') {
-      alert('Please complete all fields to submit.');
+      swal('Please complete all fields to submit a record.');
       return;
     } else if (recordPreviouslyEntered) {
       alert('A record was already added today! Please come back tomorrow.');

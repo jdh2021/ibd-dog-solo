@@ -24,6 +24,9 @@ import Typography from '@mui/material/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
+// sweetalert
+import swal from 'sweetalert';
+
 function Medication() {
   const dispatch = useDispatch();
 
@@ -73,12 +76,19 @@ function Medication() {
 
   // prompt if medication should be deleted, takes in id of medication clicked on. if confirmed, calls deleteMedication and passes id as argument
   const confirmDelete = (id) => {
-    console.log('in confirmDelete. Record id to delete is:', id);
-    if (window.confirm('Do you want to delete this record?')) {
-      deleteMedication(id);
-    }
+    console.log('in confirmDelete. Medication id to delete is:', id);
+    swal({
+      text: "Do you want to delete this medication?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(confirmDelete => {
+      if (confirmDelete) {
+        deleteMedication(id);
+      }
+    });
   }
-
+  
   // dispatches 'DELETE_MEDICATION', payload is medication id, function handleMedicationChange
   const deleteMedication = (id) => {
     dispatch({ type: 'DELETE_MEDICATION', payload: id, handleMedicationChange: handleMedicationChange });

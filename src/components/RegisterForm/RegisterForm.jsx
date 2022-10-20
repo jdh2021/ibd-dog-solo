@@ -18,6 +18,9 @@ import dayjs from 'dayjs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShieldDog } from '@fortawesome/free-solid-svg-icons';
 
+// sweetalert
+import swal from 'sweetalert';
+
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +36,7 @@ function RegisterForm() {
     event.preventDefault();
     const formattedBirthday = dayjs(dogBirthday).format('YYYY-MM-DD');
     if (username === '' || password === '' || dogName === '' || dogName === '' || dogBirthday === null) {
-      alert('Please complete all fields to create an account.');
+      swal('Please complete all fields to create an account.');
       return;
     } else {
       dispatch({

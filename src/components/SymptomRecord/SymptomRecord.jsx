@@ -12,6 +12,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
+// sweetalert
+import swal from 'sweetalert';
+
 function SymptomRecord({ symptomRecord, handleEdit }) {
   const dispatch = useDispatch();
 
@@ -115,9 +118,16 @@ function SymptomRecord({ symptomRecord, handleEdit }) {
   // prompt if record should be deleted, takes in id of record clicked on. if confirmed, calls deleteFeedback and passes ID as argument
   const confirmDelete = (id) => {
     console.log('in confirmDelete. Record id to delete is:', id);
-    if (window.confirm('Do you want to delete this record?')) {
-      deleteSymptomRecord(id);
-    }
+    swal({
+      text: "Do you want to delete this record?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(confirmDelete => {
+      if (confirmDelete) {
+        deleteSymptomRecord(id);
+      }
+    });
   }
 
   // dispatches 'DELETE_RECORD', payload is symptomRecord id, function handleSymptomRecordDelete

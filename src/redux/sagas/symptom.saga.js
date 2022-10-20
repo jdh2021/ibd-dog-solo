@@ -1,6 +1,9 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
+// sweetalert
+import swal from 'sweetalert';
+
 function* fetchRecord(action) {
   // payload is dog id
   try {
@@ -10,7 +13,7 @@ function* fetchRecord(action) {
     yield put({ type: 'SET_RECORD', payload: dogRecord.data });
   } catch (error) {
     console.log('Error in fetchRecord by dog');
-    alert('There\'s an error in fetchRecord by dog.');
+    swal('There\'s an error in fetchRecord by dog.');
   }
 }
 
@@ -23,7 +26,7 @@ function* postRecord(action) {
     action.goToHealthStatus();
   } catch (error) {
     console.log('Error in postRecord:', error);
-    alert('There\'s an error in postRecord.');
+    swal('There\'s an error in postRecord.');
   }
 }
 
@@ -36,7 +39,7 @@ function* deleteRecord(action) {
     action.handleSymptomRecordDelete();
   } catch (error) {
     console.log('Error in deleteRecord:', error);
-    alert('There\'s an error in deleteRecord.');
+    swal('There\'s an error in deleteRecord.');
   }
 }
 
@@ -49,7 +52,7 @@ function* putRecord(action) {
     action.handleEditRecordSuccess();
   } catch (error) {
     console.log('Error in putRecord:', error);
-    alert('There\'s an error in putRecord.');
+    swal('There\'s an error in putRecord.');
   }
 }
 

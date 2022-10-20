@@ -1,6 +1,9 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
+// sweetalert
+import swal from 'sweetalert';
+
 function* fetchDog() {
   try {
     const userDog = yield axios.get('/api/dog');
@@ -12,7 +15,7 @@ function* fetchDog() {
     yield put({ type: 'FETCH_RECORD', payload: userDog.data.id });
   } catch (error) {
     console.log('Error in fetchDog:', error);
-    alert('There\'s an error in fetchDog.');
+    swal('There\'s an error in fetchDog.');
   }
 }
 
@@ -24,7 +27,7 @@ function* putDog(action) {
     action.handleEditSuccess();
   } catch (error) {
     console.log('Error in putDog:', error);
-    alert('There\'s an error in putDog.');
+    swal('There\'s an error in putDog.');
   }
 }
 
