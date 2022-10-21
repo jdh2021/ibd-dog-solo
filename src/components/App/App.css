@@ -5,10 +5,12 @@ body,
 }
 
 body {
-
   margin: 0px;
   text-align: center;
   font-family: 'Quicksand', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 img {
@@ -74,4 +76,8 @@ input {
 
 .swal-modal {
   width: 350px;
+}
+
+ul {
+  list-style: none;
 }

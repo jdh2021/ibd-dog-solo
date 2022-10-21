@@ -1,5 +1,19 @@
 footer {
-  margin-top: 80px;
-  padding: 20px;
+  margin-top: auto;
+  padding-bottom: 20px;
+  padding-top: 10px;
   text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: black;
+}
+
+
+.Footer-link {
+  text-decoration: none;
+  font-size: .85rem;
+  color: black;
 }

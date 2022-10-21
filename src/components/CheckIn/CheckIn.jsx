@@ -61,7 +61,7 @@ function CheckIn() {
       swal('Please complete all fields to submit a record.');
       return;
     } else if (recordPreviouslyEntered) {
-      alert('A record was already added today! Please come back tomorrow.');
+      swal('A record was already added today! Please come back tomorrow.');
     } else {
       dispatch({
         type: 'POST_RECORD',

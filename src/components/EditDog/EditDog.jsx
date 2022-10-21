@@ -83,7 +83,7 @@ function EditDog({ setEditDog }) {
             renderInput={(params) => <TextField {...params} />}
             label="Birthday *"
             openTo="day"
-            views={['day']}
+            views={['year', 'month', 'day']}
             disableFuture
             required
           />
