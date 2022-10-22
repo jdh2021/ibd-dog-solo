@@ -7,6 +7,10 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
@@ -20,8 +24,14 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
+// material ui date picker imports 
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
+
 // fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPills } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 // sweetalert
@@ -43,13 +53,15 @@ function Medication() {
   const [medicationName, setMedicationName] = useState('');
   const [medicationFrequency, setMedicationFrequency] = useState('');
   const [medicationDosage, setMedicationDosage] = useState('');
+  // add medication dialog
+  const [open, setOpen] = useState(false);
 
   // dispatch POST_MEDICATION, payload is medication object and function handleMedicationPost
   const handleSubmitMedication = (event) => {
     event.preventDefault();
     console.log('in handleSubmitMedication');
     if (medicationName === '' || medicationDosage === '' || medicationFrequency === '') {
-      alert('Please complete all fields to add a medication.');
+      swal('Please complete all fields to add a medication.');
       return;
     } else {
       dispatch({
@@ -72,6 +84,7 @@ function Medication() {
     setMedicationName('');
     setMedicationFrequency('');
     setMedicationDosage('');
+    setOpen(false);
   }
 
   // prompt if medication should be deleted, takes in id of medication clicked on. if confirmed, calls deleteMedication and passes id as argument
@@ -88,7 +101,7 @@ function Medication() {
       }
     });
   }
-  
+
   // dispatches 'DELETE_MEDICATION', payload is medication id, function handleMedicationChange
   const deleteMedication = (id) => {
     dispatch({ type: 'DELETE_MEDICATION', payload: id, handleMedicationChange: handleMedicationChange });
@@ -110,46 +123,46 @@ function Medication() {
 
   return (
     <div>
-      <Grid container spacing={2} justifyContent="center">
-        <Grid item xs={7.5} sm={5} md={3.75} lg={3} xl={2.5}>
-          <form onSubmit={handleSubmitMedication} autoComplete="off">
-            <Card elevation={4} sx={{ backgroundColor: "#eaeef1", mb: 2, mt: 4 }}>
-              <CardContent>
-                <Typography variant="h6" sx={{ mt: 1 }}>Add Medication</Typography>
-                <br />
-                <TextField
-                  value={medicationName}
-                  onChange={(event) => setMedicationName(event.target.value)}
-                  required
-                  label="Name"
-                  size="small"
-                  sx={{ mb: 1.5 }}
-                />
-                <br />
-                <TextField
-                  value={medicationDosage}
-                  onChange={(event) => setMedicationDosage(event.target.value)}
-                  required
-                  label="Dosage"
-                  size="small"
-                  sx={{ mb: 1.5 }}
-                />
-                <br />
-                <TextField
-                  value={medicationFrequency}
-                  onChange={(event) => setMedicationFrequency(event.target.value)}
-                  required
-                  label="Frequency"
-                  size="small"
-                />
-              </CardContent>
-              <CardActions sx={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                <Button type="submit" variant="contained" sx={{ mb: 2 }}>Submit</Button>
-              </CardActions>
-            </Card>
-          </form>
-        </Grid>
-      </Grid>
+      <Button variant="contained" size="small" sx={{ mb: 1, mt: 4, pt: 1.25, pb: 1.25 }} onClick={() => setOpen(true)}>
+        <FontAwesomeIcon icon={faPlus} size="md" /><FontAwesomeIcon icon={faPills} size="lg" />
+      </Button>
+      <Dialog open={open} onClose={() => setOpen(false)} PaperProps={{ sx: { backgroundColor: "#eaeef1" } }}>
+        <DialogTitle>Add Medication</DialogTitle>
+        <DialogContent>
+          <TextField
+            value={medicationName}
+            onChange={(event) => setMedicationName(event.target.value)}
+            required
+            label="Name"
+            size="small"
+            margin="dense"
+          // sx={{ mb: 1.5 }}
+          />
+          <br />
+          <TextField
+            value={medicationDosage}
+            onChange={(event) => setMedicationDosage(event.target.value)}
+            required
+            label="Dosage"
+            size="small"
+            margin="dense"
+          // sx={{ mb: 1.5 }}
+          />
+          <br />
+          <TextField
+            value={medicationFrequency}
+            onChange={(event) => setMedicationFrequency(event.target.value)}
+            required
+            label="Frequency"
+            margin="dense"
+            size="small"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button variant="contained" onClick={() => setOpen(false)} sx={{ mb: 1 }}>Cancel</Button>
+          <Button variant="contained" onClick={handleSubmitMedication} sx={{ mb: 1 }}>Submit</Button>
+        </DialogActions>
+      </Dialog>
       <Grid container justifyContent="center">
         <Grid item xs={11.5} sm={11} md={9} lg={7.75} xl={6.25}>
           <TableContainer component={Paper} sx={{ mt: 4, mb: 5, backgroundColor: "#d6dde3" }}>
