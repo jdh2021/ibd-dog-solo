@@ -15,6 +15,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -49,19 +50,21 @@ function Medication() {
     dispatch({ type: 'FETCH_DOG' });
   }, []);
 
+  // add medication dialog
+  const [open, setOpen] = useState(false);
+
   // local state for changeable values of input fields
   const [medicationName, setMedicationName] = useState('');
   const [medicationFrequency, setMedicationFrequency] = useState('');
   const [medicationDosage, setMedicationDosage] = useState('');
-  // add medication dialog
-  const [open, setOpen] = useState(false);
+  const [medicationStart, setMedicationStart] = useState(null);
 
   // dispatch POST_MEDICATION, payload is medication object and function handleMedicationPost
   const handleSubmitMedication = (event) => {
     event.preventDefault();
     console.log('in handleSubmitMedication');
     if (medicationName === '' || medicationDosage === '' || medicationFrequency === '') {
-      swal('Please complete all fields to add a medication.');
+      swal('Please complete all required fields to add a medication.');
       return;
     } else {
       dispatch({
@@ -70,7 +73,8 @@ function Medication() {
           dog_id: dog.id,
           name: medicationName,
           dosage: medicationDosage,
-          frequency: medicationFrequency
+          frequency: medicationFrequency,
+          date_started: medicationStart
         },
         handleMedicationPost: handleMedicationPost
       })
@@ -84,6 +88,7 @@ function Medication() {
     setMedicationName('');
     setMedicationFrequency('');
     setMedicationDosage('');
+    setMedicationStart(null);
     setOpen(false);
   }
 
@@ -124,39 +129,44 @@ function Medication() {
   return (
     <div>
       <Button variant="contained" size="small" sx={{ mb: 1, mt: 4, pt: 1.25, pb: 1.25 }} onClick={() => setOpen(true)}>
-        <FontAwesomeIcon icon={faPlus} size="md" /><FontAwesomeIcon icon={faPills} size="lg" />
+        <FontAwesomeIcon icon={faPlus} /><FontAwesomeIcon icon={faPills} size="lg" />
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)} PaperProps={{ sx: { backgroundColor: "#eaeef1" } }} >
         <DialogTitle>Add Medication</DialogTitle>
         <DialogContent>
-          <TextField
-            value={medicationName}
-            onChange={(event) => setMedicationName(event.target.value)}
-            required
-            label="Name"
-            size="small"
-            margin="dense"
-          // sx={{ mb: 1.5 }}
-          />
-          <br />
-          <TextField
-            value={medicationDosage}
-            onChange={(event) => setMedicationDosage(event.target.value)}
-            required
-            label="Dosage"
-            size="small"
-            margin="dense"
-          // sx={{ mb: 1.5 }}
-          />
-          <br />
-          <TextField
-            value={medicationFrequency}
-            onChange={(event) => setMedicationFrequency(event.target.value)}
-            required
-            label="Frequency"
-            margin="dense"
-            size="small"
-          />
+          <Stack spacing={1.5} sx={{ mt: 0.5 }}>
+            <TextField
+              value={medicationName}
+              onChange={(event) => setMedicationName(event.target.value)}
+              required
+              label="Name"
+              size="small"
+            />
+            <TextField
+              value={medicationDosage}
+              onChange={(event) => setMedicationDosage(event.target.value)}
+              required
+              label="Dosage"
+              size="small"
+            />
+            <TextField
+              value={medicationFrequency}
+              onChange={(event) => setMedicationFrequency(event.target.value)}
+              required
+              label="Frequency"
+              size="small"
+            />
+            <DatePicker
+              value={medicationStart}
+              onChange={(newValue) => {
+                setMedicationStart(newValue);
+              }}
+              renderInput={(params) => <TextField size="small" {...params} />}
+              label="Start Date"
+              openTo="day"
+              views={['year', 'month', 'day']}
+            />
+          </Stack>
         </DialogContent>
         <DialogActions>
           <Button variant="contained" onClick={() => setOpen(false)} sx={{ mb: 1, ml: 2 }}>Cancel</Button>
@@ -173,6 +183,8 @@ function Medication() {
                   <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Name</TableCell>
                   <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Dosage</TableCell>
                   <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Frequency</TableCell>
+                  <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Start</TableCell>
+
                   <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Active?</TableCell>
                   <TableCell align="center" sx={{ pt: 1, pb: 1 }}></TableCell>
                 </TableRow>
@@ -185,6 +197,15 @@ function Medication() {
                   } else {
                     medicationStatus = 'Inactive-row'
                   }
+                  // date formatting to display date medication started on page. first check if null. 
+                  let medStartDate = '';
+                  let formattedMedStartDate = '';
+                  if (medication.date_started === null) {
+                    formattedMedStartDate = '';
+                  } else {
+                    medStartDate = new Date(medication.date_started);
+                    formattedMedStartDate = medStartDate.toLocaleDateString('en-US', { year: '2-digit', month: '2-digit', day: '2-digit' });
+                  }
                   return <TableRow
                     key={medication.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -195,6 +216,7 @@ function Medication() {
                     </TableCell>
                     <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>{medication.dosage}</TableCell>
                     <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>{medication.frequency}</TableCell>
+                    <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>{formattedMedStartDate}</TableCell>
                     <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>
                       <Checkbox
                         checked={medication.active}

@@ -99,7 +99,6 @@ function EditDog({ setEditDog }) {
             value={editDogImage === '' ? '' : editDogImage}
             onChange={(event) => setEditDogImage(event.target.value)}
             label="URL for Photo"
-
           />
         </Stack>
       </CardContent>

@@ -28,7 +28,7 @@ function UserPage() {
 
   // date formatting to display birthday on page
   const birthday = new Date(dog.birthday);
-  const formattedBirthday = birthday.toLocaleDateString();
+  const formattedBirthday = birthday.toLocaleDateString('en-US', { year: '2-digit', month: '2-digit', day: '2-digit' });
 
   // local state for conditional rendering of editDog card
   const [editDog, setEditDog] = useState(false);

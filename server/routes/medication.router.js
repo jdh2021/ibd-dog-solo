@@ -11,7 +11,9 @@ router.get('/:id', (req, res) => {
   if (req.isAuthenticated()) {
     const queryText = `SELECT "medication"."id", "medication"."name", 
                       "medication"."frequency", "medication"."dosage", 
-                      "medication"."active", "medication"."created_at", "medication"."dog_id" FROM "medication" 
+                      "medication"."date_started", "medication"."date_inactive", 
+                      "medication"."active", "medication"."created_at", "medication"."dog_id" 
+                      FROM "medication" 
                       JOIN "dog" on "medication"."dog_id"="dog"."id"
                       JOIN "user" on "dog"."user_id"="user"."id"
                       WHERE "dog"."id" = $1 AND "user"."id" = $2
@@ -34,13 +36,13 @@ router.post('/', (req, res) => {
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user id is:', req.user.id);
   if (req.isAuthenticated()) {
-    const queryText = `INSERT INTO "medication" ("name", "dosage", "frequency", "dog_id") 
-                      SELECT $1, $2, $3, $4
+    const queryText = `INSERT INTO "medication" ("name", "dosage", "frequency", "date_started", "dog_id") 
+                      SELECT $1, $2, $3, $4, $5
                       WHERE EXISTS (SELECT * FROM "dog"
                       JOIN "user" on "user"."id"="dog"."user_id"
-                      WHERE "dog"."user_id" = $5 AND "dog"."id" = $6);`;
-    let { name, dosage, frequency, dog_id } = req.body;
-    pool.query(queryText, [name, dosage, frequency, dog_id, req.user.id, dog_id])
+                      WHERE "dog"."user_id" = $6 AND "dog"."id" = $7);`;
+    let { name, dosage, frequency, date_started, dog_id } = req.body;
+    pool.query(queryText, [name, dosage, frequency, date_started, dog_id, req.user.id, dog_id])
       .then(result => {
         console.log('/medication POST success');
         res.sendStatus(201); // Created
