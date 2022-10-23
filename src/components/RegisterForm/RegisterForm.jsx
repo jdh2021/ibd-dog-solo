@@ -53,7 +53,7 @@ function RegisterForm() {
 
   return (
     <form onSubmit={registerUser} autoComplete="off">
-      <Card elevation={4} sx={{ backgroundColor: "#eaeef1", mb: 4, mt: 4, pb: 2 }}>
+      <Card elevation={4} sx={{ backgroundColor: "#eaeef1", mb: 4, mt: 6, pb: 2 }}>
         <CardContent>
           <Typography variant="h6" sx={{ mb: 4, mt: 2 }} align="center">
             <FontAwesomeIcon icon={faShieldDog} color="#DDA0DD" size="2xl" /> Registration
@@ -63,7 +63,7 @@ function RegisterForm() {
               {errors.registrationMessage}
             </h3>
           )}
-          <Stack spacing={2.5} sx={{ ml: 3, mr: 3 }}>
+          <Stack spacing={2.5} sx={{ ml: 3, mr: 3, mb: 1 }}>
             <TextField
               value={username}
               onChange={(event) => setUsername(event.target.value)}
@@ -94,7 +94,7 @@ function RegisterForm() {
             <DatePicker
               value={dogBirthday}
               onChange={(newValue) => { setDogBirthday(newValue); }}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => <TextField size="small" {...params} />}
               disableFuture
               label="dog's birthday (est.) *"
               openTo="day"

@@ -43,7 +43,7 @@ function LoginForm() {
 
   return (
     <form autoComplete="off" onSubmit={login}>
-      <Card elevation={4} sx={{ backgroundColor: "#eaeef1", mb: 4, mt: 4, pb: 2 }}>
+      <Card elevation={4} sx={{ backgroundColor: "#eaeef1", mb: 4, mt: 6, pb: 2 }}>
         <CardContent>
           <Typography variant="h6" sx={{ mb: 4, mt: 2 }} align="center">
             <FontAwesomeIcon icon={faPaw} color="#DDA0DD" size="xl" /> Login
@@ -53,7 +53,7 @@ function LoginForm() {
               {errors.loginMessage}
             </h3>
           )}
-          <Stack spacing={2.5} sx={{ ml: 5, mr: 5 }}>
+          <Stack spacing={2.5} sx={{ ml: 5, mr: 5, mb: 1 }}>
             <TextField
               value={username}
               onChange={(event) => setUsername(event.target.value)}
@@ -73,7 +73,7 @@ function LoginForm() {
             />
           </Stack>
         </CardContent>
-        <CardActions sx={{ display: "flex", flexDirection: "row", justifyContent: "center", mt: 0.5, mb: 1 }}>
+        <CardActions sx={{ display: "flex", flexDirection: "row", justifyContent: "center", mt: 0.5 }}>
           <Button variant="contained" sx={{ mb: 1, ml: 2 }} onClick={() => history.push('/registration')}>Register</Button>
           <Button variant="contained" sx={{ mb: 1, mr: 2 }} type="submit">Login</Button>
         </CardActions>

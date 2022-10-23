@@ -205,19 +205,19 @@ function Medication() {
         </DialogActions>
       </Dialog>
       <Grid container justifyContent="center">
-        <Grid item xs={11.5} sm={11} md={9} lg={7.75} xl={6.25}>
+        <Grid item xs={11.5} sm={11} md={8.75} lg={7} xl={6}>
           <TableContainer component={Paper} sx={{ mt: 4, mb: 5, backgroundColor: "#d6dde3" }}>
-            <Typography sx={{ mt: 2.5, mb: 2 }} variant="h6">Medications</Typography>
+            <Typography sx={{ mt: 3, mb: 2 }} variant="h6">Medications</Typography>
             <Table sx={{ backgroundColor: "#eaeef1", p: 3 }} size="small">
               <TableHead>
                 <TableRow>
-                  <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Name</TableCell>
-                  <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Dosage</TableCell>
-                  <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Frequency</TableCell>
-                  <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Start</TableCell>
-                  <TableCell align="center" sx={{ pt: 1, pb: 1 }}>End</TableCell>
-                  <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Active?</TableCell>
-                  <TableCell align="center" sx={{ pt: 1, pb: 1 }}></TableCell>
+                  <TableCell align="center" sx={{ pt: 1, pb: 1 }} style={{ minWidth: 40 }}>Name</TableCell>
+                  <TableCell align="center" sx={{ pt: 1, pb: 1 }} style={{ minWidth: 40 }}>Dosage</TableCell>
+                  <TableCell align="center" sx={{ pt: 1, pb: 1 }} style={{ minWidth: 40 }}>Frequency</TableCell>
+                  <TableCell align="center" sx={{ pt: 1, pb: 1 }} style={{ minWidth: 30 }}>Start</TableCell>
+                  <TableCell align="center" sx={{ pt: 1, pb: 1 }} style={{ minWidth: 30 }}>End</TableCell>
+                  <TableCell align="center" sx={{ pt: 1, pb: 1, pl: 0.2, pr: 0.2 }} style={{ minWidth: 10 }}>Active?</TableCell>
+                  <TableCell align="center" sx={{ pt: 1, pb: 1 }} style={{ minWidth: 20 }}></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -250,20 +250,20 @@ function Medication() {
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     className={medicationStatus}
                   >
-                    <TableCell component="th" scope="row" align="center" sx={{ pt: 0.2, pb: 0.2 }}>
+                    <TableCell component="th" scope="row" align="center" sx={{ pt: 0.3, pb: 0.3 }}>
                       {medication.name}
                     </TableCell>
-                    <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>{medication.dosage}</TableCell>
-                    <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>{medication.frequency}</TableCell>
-                    <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>{formattedMedStartDate}</TableCell>
-                    <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>{formattedMedEndDate}</TableCell>
-                    <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>
+                    <TableCell align="center" sx={{ pl: 0, pr: 0, pt: 0.3, pb: 0.3 }}>{medication.dosage}</TableCell>
+                    <TableCell align="center" sx={{ pl: 0, pr: 0, pt: 0.3, pb: 0.3 }}>{medication.frequency}</TableCell>
+                    <TableCell align="center" sx={{ pl: 0, pr: 0, pt: 0.3, pb: 0.3 }}>{formattedMedStartDate}</TableCell>
+                    <TableCell align="center" sx={{ pl: 0, pr: 0, pt: 0.3, pb: 0.3 }}>{formattedMedEndDate}</TableCell>
+                    <TableCell align="center" sx={{ pl: 0, pr: 0, pt: 0.3, pb: 0.3 }}>
                       <Checkbox
                         checked={medication.active}
                         onChange={() => editMedicationStatus(medication)}
                       />
                     </TableCell>
-                    <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>
+                    <TableCell align="center" sx={{ pl: 0, pr: 0, pt: 0.3, pb: 0.3 }}>
                       <IconButton sx={{ color: "#9c27b0" }} onClick={() => confirmDelete(medication.id)}>
                         <FontAwesomeIcon icon={faTrash} size="xs" />
                       </IconButton>

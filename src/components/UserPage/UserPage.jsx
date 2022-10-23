@@ -58,14 +58,14 @@ function UserPage() {
                 {dog.name}
               </Typography>
               <Typography variant="body1">
-                  Birthday: {formattedBirthday}
+                Birthday: {formattedBirthday}
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="body1" sx={{ pl: 1, pr: 1 }}>
                 Food:
                 {dog.food != '' ? <span> {dog.food}</span> : <span> -</span>}
               </Typography>
               <Typography style={{ wordWrap: "break-word" }} variant="body1" sx={{ pl: 4, pr: 4 }}>
-                Medication(s): <br />
+                Medication(s):<br />
                 {medications.length != 0 ?
                   medications.map(medication =>
                     medication.active && <span key={medication.id}> &#8226; {medication.name} </span>
