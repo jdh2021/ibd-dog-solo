@@ -31,8 +31,8 @@ router.post('/register', async (req, res, next) => {
      // creating user id
     const userId = response.rows[0].id;
     console.log('User id is:', userId);
-    await pool.query( `INSERT INTO "dog" ("name", "birthday", "user_id", "image")
-                      VALUES($1, $2, $3, $4);`, [dogName, dogBirthday, userId, '']);
+    await pool.query( `INSERT INTO "dog" ("name", "birthday", "food", "user_id", "image")
+                      VALUES($1, $2, $3, $4, $5);`, [dogName, dogBirthday, '', userId, '']);
     // commit if queries succeed
     await client.query('COMMIT');
     res.sendStatus(201); //created

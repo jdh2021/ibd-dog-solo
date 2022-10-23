@@ -13,13 +13,13 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons';
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 function Footer() {
-  return <footer>
+  return <footer className="Footer-content">
     {/* &copy; Prime Digital Academy */}
-    <Link className="Footer-link" to="/about">
-      <FontAwesomeIcon icon={faCircleQuestion} color="#9c27b0" />
-    </Link> |  <Link className="Footer-link" to="/home">
-      <FontAwesomeIcon icon={faHouse} color="#9c27b0" />
-    </Link>
+      <Link className="Footer-link" to="/about">
+        <FontAwesomeIcon icon={faCircleQuestion} color="#9c27b0" />
+      </Link> |  <Link className="Footer-link" to="/home">
+        <FontAwesomeIcon icon={faHouse} color="#9c27b0" />
+      </Link>
   </footer>;
 }
 

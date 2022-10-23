@@ -24,6 +24,7 @@ function EditDog({ setEditDog }) {
   // local state for changeable values of input fields
   const [editDogName, setEditDogName] = useState(dog.name);
   const [editDogBirthday, setEditDogBirthday] = useState(dog.birthday);
+  const [editDogFood, setEditDogFood] = useState(dog.food);
   const [editDogImage, setEditDogImage] = useState(dog.image);
 
   // render normal dog view when cancel button is clicked
@@ -47,6 +48,7 @@ function EditDog({ setEditDog }) {
           id: dog.id,
           name: editDogName,
           birthday: formattedEditBirthday,
+          food: editDogFood,
           image: editDogImage,
         },
         handleEditSuccess: handleEditSuccess
@@ -86,6 +88,12 @@ function EditDog({ setEditDog }) {
             views={['year', 'month', 'day']}
             disableFuture
             required
+          />
+           <TextField
+            value={editDogFood}
+            onChange={(event) => setEditDogFood(event.target.value)}
+            label="Food"
+            variant="outlined"
           />
           <TextField
             value={editDogImage === '' ? '' : editDogImage}

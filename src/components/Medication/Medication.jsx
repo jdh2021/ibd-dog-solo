@@ -126,7 +126,7 @@ function Medication() {
       <Button variant="contained" size="small" sx={{ mb: 1, mt: 4, pt: 1.25, pb: 1.25 }} onClick={() => setOpen(true)}>
         <FontAwesomeIcon icon={faPlus} size="md" /><FontAwesomeIcon icon={faPills} size="lg" />
       </Button>
-      <Dialog open={open} onClose={() => setOpen(false)} PaperProps={{ sx: { backgroundColor: "#eaeef1" } }}>
+      <Dialog open={open} onClose={() => setOpen(false)} PaperProps={{ sx: { backgroundColor: "#eaeef1" } }} >
         <DialogTitle>Add Medication</DialogTitle>
         <DialogContent>
           <TextField
@@ -159,8 +159,8 @@ function Medication() {
           />
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={() => setOpen(false)} sx={{ mb: 1 }}>Cancel</Button>
-          <Button variant="contained" onClick={handleSubmitMedication} sx={{ mb: 1 }}>Submit</Button>
+          <Button variant="contained" onClick={() => setOpen(false)} sx={{ mb: 1, ml: 2 }}>Cancel</Button>
+          <Button variant="contained" onClick={handleSubmitMedication} sx={{ mb: 1, mr: 2 }}>Submit</Button>
         </DialogActions>
       </Dialog>
       <Grid container justifyContent="center">

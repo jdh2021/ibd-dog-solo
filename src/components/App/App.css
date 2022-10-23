@@ -78,6 +78,7 @@ input {
   width: 350px;
 }
 
-ul {
-  list-style: none;
+.Main-content {
+  min-height: calc(100vh - 60px);
 }
+

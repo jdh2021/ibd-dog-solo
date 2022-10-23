@@ -1,4 +1,4 @@
-footer {
+/* footer {
   margin-top: auto;
   padding-bottom: 20px;
   padding-top: 10px;
@@ -9,8 +9,12 @@ footer {
   width: 100%;
   background-color: white;
   color: black;
-}
+} */
 
+.Footer-content {
+  height: 60px;
+  line-height: 60px;
+}
 
 .Footer-link {
   text-decoration: none;

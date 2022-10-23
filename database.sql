@@ -13,7 +13,8 @@ CREATE TABLE "dog" (
   "id" SERIAL PRIMARY KEY,
   "name" VARCHAR(40) NOT NULL,
   "birthday" DATE NOT NULL,
-  "image" VARCHAR(300),
+  "food" VARCHAR(60),
+  "image" VARCHAR(1000),
   "user_id" INT REFERENCES "user" NOT NULL
 );
 

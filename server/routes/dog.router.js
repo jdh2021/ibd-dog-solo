@@ -30,10 +30,10 @@ router.put('/', (req, res) => {
   // response: s/b 200 - OK (dog updated)
   if (req.isAuthenticated()) {
     const queryText =   `UPDATE "dog" SET "name" = $1,
-                        "birthday" = $2, "image" = $3
-                        WHERE "id" = $4 and "user_id" = $5;`;
-    let { name, birthday, image, id } = req.body;
-    pool.query(queryText, [name, birthday, image, id, req.user.id])
+                        "birthday" = $2, "food" = $3, "image" = $4
+                        WHERE "id" = $5 and "user_id" = $6;`;
+    let { name, birthday, food, image, id } = req.body;
+    pool.query(queryText, [name, birthday, food, image, id, req.user.id])
       .then(result => {
           console.log('/dog PUT success');
           res.sendStatus(200);
