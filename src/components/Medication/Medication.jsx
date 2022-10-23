@@ -120,19 +120,41 @@ function Medication() {
   // dispatches 'PUT_MEDICATION', payload is medication object, function handleMedicationChange
   const editMedicationStatus = (medication) => {
     console.log('in editMedicationStatus');
-    const now = new Date();
-    console.log('now is:', now);
-    const inactiveDate = dayjs(now).format('YYYY-MM-DD');
-    console.log('inactiveDate is:', inactiveDate);
-    dispatch({
-      type: 'PUT_MEDICATION',
-      payload: {
-        id: medication.id,
-        active: !medication.active,
-        date_inactive: inactiveDate,
-      },
-      handleMedicationChange: handleMedicationChange
-    })
+    // conditionals to send date clicked as inactive date or null as inactive date
+    if (medication.active === true && medication.date_started != null) {
+      const now = new Date();
+      const inactiveDate = dayjs(now).format('YYYY-MM-DD');
+      dispatch({
+        type: 'PUT_MEDICATION',
+        payload: {
+          id: medication.id,
+          active: !medication.active,
+          date_inactive: inactiveDate,
+        },
+        handleMedicationChange: handleMedicationChange
+      })
+    }
+    else if (medication.active === true && medication.date_started === null) {
+      dispatch({
+        type: 'PUT_MEDICATION',
+        payload: {
+          id: medication.id,
+          active: !medication.active,
+          date_inactive: null,
+        },
+        handleMedicationChange: handleMedicationChange
+      })
+    } else if (medication.active === false) {
+      dispatch({
+        type: 'PUT_MEDICATION',
+        payload: {
+          id: medication.id,
+          active: !medication.active,
+          date_inactive: null,
+        },
+        handleMedicationChange: handleMedicationChange
+      })
+    }
   }
 
   return (

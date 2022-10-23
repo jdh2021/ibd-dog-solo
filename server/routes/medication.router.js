@@ -78,16 +78,17 @@ router.delete('/:id', (req, res) => {
 });
 
 // PUT medication - check dog id, req.user.id
-router.put('/:id', (req, res) => {
-  console.log('in /api/medication PUT by id. Medication id to update is:', req.params.id);
+router.put('/', (req, res) => {
+  console.log('in /api/medication PUT. Medication object to update is:', req.body);
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user id is:', req.user.id);
   if (req.isAuthenticated()) {
     const queryText = `UPDATE "medication"
-                      SET "active" = NOT active
+                      SET "active" = $1, "date_inactive" = $2
                       FROM "dog" 
-                      WHERE "dog"."id"="medication"."dog_id" AND "medication"."id"= $1 AND "dog"."user_id"= $2;`;
-    pool.query(queryText, [req.params.id, req.user.id]).then(result => {
+                      WHERE "dog"."id"="medication"."dog_id" AND "medication"."id"= $3 AND "dog"."user_id"= $4;`;
+    let { active, date_inactive, id } = req.body;
+    pool.query(queryText, [active, date_inactive, id, req.user.id]).then(result => {
       console.log('/medication PUT success');
       res.sendStatus(200); // OK
     }).catch(error => {
