@@ -117,12 +117,21 @@ function Medication() {
     dispatch({ type: 'FETCH_MEDICATION', payload: dog.id });
   }
 
-  // dispatches 'PUT_MEDICATION', payload is medication id, function handleMedicationChange
-  const editMedicationStatus = (id) => {
+  // dispatches 'PUT_MEDICATION', payload is medication object, function handleMedicationChange
+  const editMedicationStatus = (medication) => {
     console.log('in editMedicationStatus');
+    const now = new Date();
+    console.log('now is:', now);
+    const inactiveDate = dayjs(now).format('YYYY-MM-DD');
+    console.log('inactiveDate is:', inactiveDate);
     dispatch({
       type: 'PUT_MEDICATION',
-      payload: id, handleMedicationChange: handleMedicationChange
+      payload: {
+        id: medication.id,
+        active: !medication.active,
+        date_inactive: inactiveDate,
+      },
+      handleMedicationChange: handleMedicationChange
     })
   }
 
@@ -184,7 +193,7 @@ function Medication() {
                   <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Dosage</TableCell>
                   <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Frequency</TableCell>
                   <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Start</TableCell>
-
+                  <TableCell align="center" sx={{ pt: 1, pb: 1 }}>End</TableCell>
                   <TableCell align="center" sx={{ pt: 1, pb: 1 }}>Active?</TableCell>
                   <TableCell align="center" sx={{ pt: 1, pb: 1 }}></TableCell>
                 </TableRow>
@@ -200,11 +209,19 @@ function Medication() {
                   // date formatting to display date medication started on page. first check if null. 
                   let medStartDate = '';
                   let formattedMedStartDate = '';
+                  let medEndDate = '';
+                  let formattedMedEndDate = '';
                   if (medication.date_started === null) {
                     formattedMedStartDate = '';
                   } else {
                     medStartDate = new Date(medication.date_started);
                     formattedMedStartDate = medStartDate.toLocaleDateString('en-US', { year: '2-digit', month: '2-digit', day: '2-digit' });
+                  }
+                  if (medication.date_inactive === null) {
+                    formattedMedEndDate = '';
+                  } else {
+                    medEndDate = new Date(medication.date_inactive);
+                    formattedMedEndDate = medEndDate.toLocaleDateString('en-US', { year: '2-digit', month: '2-digit', day: '2-digit' });
                   }
                   return <TableRow
                     key={medication.id}
@@ -217,10 +234,11 @@ function Medication() {
                     <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>{medication.dosage}</TableCell>
                     <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>{medication.frequency}</TableCell>
                     <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>{formattedMedStartDate}</TableCell>
+                    <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>{formattedMedEndDate}</TableCell>
                     <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>
                       <Checkbox
                         checked={medication.active}
-                        onChange={() => editMedicationStatus(medication.id)}
+                        onChange={() => editMedicationStatus(medication)}
                       />
                     </TableCell>
                     <TableCell align="center" sx={{ pt: 0.2, pb: 0.2 }}>

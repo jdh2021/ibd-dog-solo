@@ -44,10 +44,10 @@ function* deleteMedication(action) {
 }
 
 function* putMedication(action) {
-  // payload is medication id
+  // payload is medication object
   try {
-    console.log('medication id to update is', action.payload);
-    yield axios.put(`/api/medication/${action.payload}`);
+    console.log('medication object to update is', action.payload);
+    yield axios.put('/api/medication', action.payload);
     // after successful PUT, dispatch 'FETCH_MEDICATION'
     action.handleMedicationChange();
   } catch (error) {
@@ -55,7 +55,6 @@ function* putMedication(action) {
     swal('There\'s an error in putMedication.');
   }
 }
-
 
 function* medicationSaga() {
   yield takeLatest('FETCH_MEDICATION', fetchMedication);

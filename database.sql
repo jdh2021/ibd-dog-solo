@@ -38,5 +38,7 @@ CREATE TABLE "medication" (
   "frequency" VARCHAR(40) NOT NULL,
   "created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
   "active" BOOLEAN DEFAULT TRUE,
+  "date_started" DATE,
+  "date_inactive" DATE,
   "dog_id" INT REFERENCES "dog" NOT NULL
 );
