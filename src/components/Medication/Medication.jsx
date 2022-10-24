@@ -4,9 +4,6 @@ import './Medication.css';
 
 // material ui imports
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -124,15 +121,24 @@ function Medication() {
     if (medication.active === true && medication.date_started != null) {
       const now = new Date();
       const inactiveDate = dayjs(now).format('YYYY-MM-DD');
-      dispatch({
-        type: 'PUT_MEDICATION',
-        payload: {
-          id: medication.id,
-          active: !medication.active,
-          date_inactive: inactiveDate,
-        },
-        handleMedicationChange: handleMedicationChange
-      })
+      const medStart = new Date(medication.date_started);
+      console.log(now);
+      console.log(medStart);
+      // conditional to check inactive date is greater than start date. if not, alert and return.
+      if (medStart > now) {
+        swal('This medication can be marked inactive on or after its start date.');
+        return;
+      } else {
+        dispatch({
+          type: 'PUT_MEDICATION',
+          payload: {
+            id: medication.id,
+            active: !medication.active,
+            date_inactive: inactiveDate,
+          },
+          handleMedicationChange: handleMedicationChange
+        })
+      }
     }
     else if (medication.active === true && medication.date_started === null) {
       dispatch({
