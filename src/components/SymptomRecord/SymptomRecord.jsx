@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import './SymptomRecord.css';
 
-// material ui imports
+// mui imports
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import TableCell from '@mui/material/TableCell';
@@ -9,8 +9,7 @@ import TableRow from '@mui/material/TableRow';
 
 // fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 // sweetalert
 import swal from 'sweetalert';
@@ -22,12 +21,12 @@ function SymptomRecord({ symptomRecord, handleEdit }) {
   const date = new Date(symptomRecord.created_at);
   const dateDisplay = `${(date.getMonth() + 1)}.${date.getDate()}.${date.getFullYear().toLocaleString().slice(-2)}`;
 
-  // empty variable to store integer value converted back to text
-  let appetiteDisplay = <span></span>;
-  let energyDisplay = <span></span>;
-  let stomachPainDisplay = <span></span>;
-  let vomitDisplay = <span></span>;
-  let diarrheaDisplay = <span></span>;
+  // variables to store integer value converted back to text
+  let appetiteDisplay;
+  let energyDisplay;
+  let stomachPainDisplay;
+  let vomitDisplay;
+  let diarrheaDisplay;
 
   // switch statements to check value for each category and supply text equivalent selected by user
   switch (symptomRecord.appetite) {

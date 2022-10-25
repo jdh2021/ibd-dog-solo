@@ -8,30 +8,24 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
+import './App.css';
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
+import CheckIn from '../CheckIn/CheckIn';
+import Footer from '../Footer/Footer';
+import HealthStatus from '../HealthStatus/HealthStatus';
+import HomePage from '../HomePage/HomePage';
 import LoginPage from '../LoginPage/LoginPage';
+import Medication from '../Medication/Medication';
+import Nav from '../Nav/Nav';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
-import CheckIn from '../CheckIn/CheckIn';
-import HealthStatus from '../HealthStatus/HealthStatus';
-import Medication from '../Medication/Medication';
-
-import './App.css';
-
-//MUI date picker
+// mui date picker
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 // font, color theme
-import { createTheme, ThemeProvider} from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
 
 const fontTheme = createTheme({
@@ -47,7 +41,7 @@ const fontTheme = createTheme({
       main: purple[500],
     },
     secondary: {
-        main: '#f5811d',
+      main: '#f5811d',
     },
   }
 });
@@ -63,7 +57,7 @@ function App() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <ThemeProvider theme={fontTheme}> 
+      <ThemeProvider theme={fontTheme}>
         <Router>
           <div className="Main-content">
             <Nav />
@@ -79,13 +73,13 @@ function App() {
               </Route>
 
               {/* For protected routes, the view could show one of several things on the same route.
-                Visiting localhost:3000/user will show the UserPage if the user is logged in.
+                Visiting localhost:3000/home will show the HomePage if the user is logged in.
                 If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-                Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-              <ProtectedRoute // logged in shows UserPage else shows LoginPage
-                exact path="/user"
+                Even though it seems like they are different pages, the user is always on localhost:3000/home */}
+              <ProtectedRoute // logged in shows HomePage 
+                exact path="/home"
               >
-                <UserPage />
+                <HomePage />
               </ProtectedRoute>
 
               <ProtectedRoute exact path="/checkin">
@@ -100,17 +94,11 @@ function App() {
                 <Medication />
               </ProtectedRoute>
 
-              {/* <ProtectedRoute // logged in shows InfoPage else shows LoginPage
-                exact path="/info"
-              >
-                <InfoPage />
-              </ProtectedRoute> */}
-
               <Route exact path="/login">
                 {user.id ?
                   // If the user is already logged in, 
-                  // redirect to the /user page
-                  <Redirect to="/user" />
+                  // redirect to the /home page
+                  <Redirect to="/home" />
                   :
                   // Otherwise, show the login page
                   <LoginPage />
@@ -121,31 +109,19 @@ function App() {
                 {user.id ?
                   // If the user is already logged in, 
                   // redirect them to the /user page
-                  <Redirect to="/user" />
+                  <Redirect to="/home" />
                   :
                   // Otherwise, show the registration page
                   <RegisterPage />
                 }
               </Route>
-
-              <Route exact path="/home">
-                {user.id ?
-                  // If the user is already logged in, 
-                  // redirect them to the /user page
-                  <Redirect to="/user" />
-                  :
-                  // Otherwise, show the Landing page
-                  <LandingPage />
-                }
-              </Route>
-
               {/* If none of the other routes matched, we will show a 404. */}
               <Route>
                 <h1>404</h1>
               </Route>
             </Switch>
-            </div>
-            <Footer />
+          </div>
+          <Footer />
         </Router>
       </ThemeProvider>
     </LocalizationProvider>

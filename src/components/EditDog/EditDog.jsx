@@ -1,16 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+// mui imports
 import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-
-// material ui date picker imports to update dog birthday
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs';
 
 // sweetalert
 import swal from 'sweetalert';
@@ -32,12 +30,10 @@ function EditDog({ setEditDog }) {
     setEditDog(false);
   }
 
-  /* convert dog birthday string to YYYY-MM-DD format to insert into database. check that dogName and dogBirthday aren't empty strings.
-  dispatch 'PUT_DOG' with payload of updated dog object and function handleEditSuccess */
+  // check that dogName and dogBirthday aren't empty strings. dispatch 'PUT_DOG' with payload of updated dog object and function handleEditSuccess
   const handleEditSave = (event) => {
     event.preventDefault();
     console.log('in handleEditSave');
-    const formattedEditBirthday = dayjs(editDogBirthday).format('YYYY-MM-DD');
     if (editDogName === '' || editDogBirthday === null ) {
       swal('Please update your dog\'s name and birthday.');
       return;
@@ -47,7 +43,7 @@ function EditDog({ setEditDog }) {
         payload: {
           id: dog.id,
           name: editDogName,
-          birthday: formattedEditBirthday,
+          birthday: editDogBirthday,
           food: editDogFood,
           image: editDogImage,
         },

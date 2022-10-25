@@ -1,18 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaw } from '@fortawesome/free-solid-svg-icons';
-import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
-import { faHeartPulse } from '@fortawesome/free-solid-svg-icons';
-import { faPills } from '@fortawesome/free-solid-svg-icons';
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faPaw, faClipboardCheck, faHeartPulse, faPills, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
+// mui import
 import Grid from '@mui/material/Grid';
 
 function Nav() {
@@ -28,18 +23,10 @@ function Nav() {
           </Link>
         </Grid>
         <Grid item className="nav">
-          {/* If no user is logged in, show these links */}
-          {/* {!user.id && (
-            // If there's no user, show login/registration links
-            <Link className="navLink" to="/login">
-              Login / Register
-            </Link>
-          )} */}
-
           {/* If a user is logged in, show these links */}
           {user.id && (
             <>
-              <Link className="navLink" to="/user">
+              <Link className="navLink" to="/home">
                 <FontAwesomeIcon icon={faPaw} size="xl"/>
               </Link>
               <Link className="navLink" to="/checkin">
@@ -52,14 +39,8 @@ function Nav() {
                 <FontAwesomeIcon icon={faPills} size="xl"/>
               </Link>
               <FontAwesomeIcon className="Log-out" icon={faRightFromBracket} onClick={() => dispatch({ type: 'LOGOUT' })}/>
-              {/* <Link className="navLink" to="/info">
-                Info Page
-              </Link> */}
             </>
           )}
-          {/* <Link className="navLink" to="/about">
-            About
-          </Link> */}
         </Grid>
       </Grid>
     </>

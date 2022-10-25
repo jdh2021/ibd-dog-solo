@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 
-// material ui imports
+// mui imports
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -19,8 +19,10 @@ function AboutPage() {
             <Typography variant="h6" sx={{ mt: 2, mb: 2 }}>
               About IBDog
             </Typography>
-            <Typography>
-              Pet owners play a crucial role in navigating veterinary healthcare systems and advocating for their animals. IBDog was born from the desire to improve quality of life for dogs with Inflammatory Bowel Disease by helping owners better manage the condition and communicate their findings with treating veterinarians.
+            <Typography sx={{ ml: 2, mr: 2 }}>
+              Pet owners play a crucial role in navigating veterinary healthcare systems and advocating for their animals.
+              IBDog was born from the desire to improve quality of life for dogs with Inflammatory Bowel Disease by helping owners
+              better manage the condition and communicate their observations with treating veterinarians.
             </Typography>
             <br />
             <Typography variant="h6">

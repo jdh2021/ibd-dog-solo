@@ -1,5 +1,5 @@
 
-// stores array of symptom record objects
+// stores array of symptom record objects for one dog
 const recordReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_RECORD':

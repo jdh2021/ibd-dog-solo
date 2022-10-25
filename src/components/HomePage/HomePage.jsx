@@ -1,11 +1,9 @@
 import React from 'react';
-// import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-
 import EditDog from '../EditDog/EditDog';
 
-// material ui imports
+// mui imports
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -14,7 +12,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-function UserPage() {
+function HomePage() {
   const dispatch = useDispatch();
 
   // dispatch action 'FETCH_DOG' on when UserPage renders
@@ -89,13 +87,4 @@ function UserPage() {
 }
 
 // this allows us to use <App /> in index.js
-export default UserPage;
-
-
-// // this component doesn't do much to start, just renders some user reducer info to the DOM
-// const user = useSelector((store) => store.user);
-// <div className="container">
-// <h2>Welcome, {user.username}!</h2>
-// <p>Your ID is: {user.id}</p>
-// {/* <LogOutButton className="btn" /> */}
-// </div>
+export default HomePage;

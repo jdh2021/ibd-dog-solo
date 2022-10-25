@@ -7,14 +7,12 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-// date picker
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs';
 
-// fa imports
+// fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShieldDog } from '@fortawesome/free-solid-svg-icons';
 
@@ -34,7 +32,6 @@ function RegisterForm() {
 
   const registerUser = (event) => {
     event.preventDefault();
-    const formattedBirthday = dayjs(dogBirthday).format('YYYY-MM-DD');
     if (username === '' || password === '' || dogName === '' || dogName === '' || dogBirthday === null) {
       swal('Please complete all fields to create an account.');
       return;
@@ -45,7 +42,7 @@ function RegisterForm() {
           username: username,
           password: password,
           name: dogName,
-          birthday: formattedBirthday,
+          birthday: dogBirthday,
         },
       });
     };
@@ -112,37 +109,3 @@ function RegisterForm() {
 }
 
 export default RegisterForm;
-
-{/* <h2>Register User</h2>
-{errors.registrationMessage && (
-  <h3 className="alert" role="alert">
-    {errors.registrationMessage}
-  </h3>
-)}
-<div>
-  <label htmlFor="username">
-    Username:
-    <input
-      type="text"
-      name="username"
-      value={username}
-      required
-      onChange={(event) => setUsername(event.target.value)}
-    />
-  </label>
-</div>
-<div>
-  <label htmlFor="password">
-    Password:
-    <input
-      type="password"
-      name="password"
-      value={password}
-      required
-      onChange={(event) => setPassword(event.target.value)}
-    />
-  </label>
-</div>
-<div>
-  <input className="btn" type="submit" name="submit" value="Register" />
-</div> */}

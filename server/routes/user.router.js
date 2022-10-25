@@ -27,15 +27,13 @@ router.post('/register', async (req, res, next) => {
     await client.query('BEGIN');
     const queryText = `INSERT INTO "user" (username, password)
                       VALUES ($1, $2) RETURNING "id";`;
-    let response = await pool.query(queryText, [username, password])
-     // creating user id
-    const userId = response.rows[0].id;
+    const result = await pool.query(queryText, [username, password])
+    const userId = result.rows[0].id; // first, userId is created
     console.log('User id is:', userId);
     await pool.query( `INSERT INTO "dog" ("name", "birthday", "food", "user_id", "image")
                       VALUES($1, $2, $3, $4, $5);`, [dogName, dogBirthday, '', userId, '']);
-    // commit if queries succeed
-    await client.query('COMMIT');
-    res.sendStatus(201); //created
+    await client.query('COMMIT'); // Commit if queries succeed
+    res.sendStatus(201); // Created
   } catch (error) {
     console.log('User registration failed: ', error);
     await client.query('ROLLBACK');

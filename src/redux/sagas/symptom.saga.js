@@ -10,10 +10,11 @@ function* fetchRecord(action) {
     console.log('Dog id to retrieve record(s) for is:', action.payload);
     const dogRecord = yield axios.get(`/api/symptom/${action.payload}`);
     console.log('dogRecord array:', dogRecord.data);
+    // after successful GET, dispatch action to store record(s) in record reducer
     yield put({ type: 'SET_RECORD', payload: dogRecord.data });
   } catch (error) {
-    console.log('Error in fetchRecord by dog');
-    swal('There\'s an error in fetchRecord by dog.');
+    console.log('Error in fetchRecord:', error);
+    swal('There\'s an error in fetchRecord.');
   }
 }
 
@@ -55,7 +56,6 @@ function* putRecord(action) {
     swal('There\'s an error in putRecord.');
   }
 }
-
 
 function* symptomSaga() {
   yield takeLatest('FETCH_RECORD', fetchRecord);

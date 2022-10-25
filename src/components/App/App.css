@@ -18,22 +18,22 @@ img {
   max-width: 100%;
 }
 
-.alert {
-  /* box-sizing: border-box; */
-  padding: 0px 10px 15px;
-  /* margin: 40px 0; */
-  /* border: 2px solid darkgray; */
-  background-color: #eaeef1;
-  /* border-radius: 3px; */
-  color: #f5811d;
-  font-size: 1rem;
-}
-
 input {
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   margin: 5px;
   margin-bottom: 10px;
+}
+
+.alert {
+  padding: 0px 10px 15px;
+  background-color: #eaeef1;
+  color: #f5811d;
+  font-size: 1rem;
+}
+
+.Main-content {
+  min-height: calc(100vh - 60px);
 }
 
 .swal-text {
@@ -52,33 +52,14 @@ input {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 5px;
 }
 
-/* .swal-button--danger {
-  border-radius: 4px;
-  background-color: plum;
-  color: white;
-  font-size: 0.85rem;
-  font-family: 'Quicksand', sans-serif;
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 5px;
-} */
-
-.swal-button:focus { 
+.swal-button:focus {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 5px;
 }
 
-.swal-button:hover { 
+.swal-button:hover {
   background-color: #6D1B7B !important;
 }
-
-/* .swal-button--danger:hover {
-  background-color: rgb(212, 130, 212) !important;
-} */
 
 .swal-modal {
   width: 350px;
 }
-
-.Main-content {
-  min-height: calc(100vh - 60px);
-}
-

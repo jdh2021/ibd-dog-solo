@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 
 // fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faCircleQuestion, faHouse } from '@fortawesome/free-solid-svg-icons';
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -14,7 +13,6 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons';
 
 function Footer() {
   return <footer className="Footer-content">
-    {/* &copy; Prime Digital Academy */}
       <Link className="Footer-link" to="/about">
         <FontAwesomeIcon icon={faCircleQuestion} color="#9c27b0" />
       </Link> |  <Link className="Footer-link" to="/home">

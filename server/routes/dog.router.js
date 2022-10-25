@@ -4,10 +4,8 @@ const router = express.Router();
 
 // GET dog - check req.user.id
 router.get('/', (req, res) => {
-  console.log('in /api/dog GET by user id');
+  console.log('in /api/dog GET by user id. user id is:', req.user.id);
   console.log('is authenticated?', req.isAuthenticated());
-  console.log('user id is:', req.user.id);
-  // response: s/b dog object
   if (req.isAuthenticated()) {
     const queryText = `SELECT * FROM "dog" WHERE "user_id" = $1;`;
     pool.query(queryText, [req.user.id]).then(result => {
@@ -27,7 +25,6 @@ router.put('/', (req, res) => {
   console.log('in /api/dog PUT. Dog object to update is:', req.body);
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user id is:', req.user.id);
-  // response: s/b 200 - OK (dog updated)
   if (req.isAuthenticated()) {
     const queryText =   `UPDATE "dog" SET "name" = $1,
                         "birthday" = $2, "food" = $3, "image" = $4
@@ -35,11 +32,11 @@ router.put('/', (req, res) => {
     let { name, birthday, food, image, id } = req.body;
     pool.query(queryText, [name, birthday, food, image, id, req.user.id])
       .then(result => {
-          console.log('/dog PUT success');
-          res.sendStatus(200);
+        console.log('/dog PUT success');
+        res.sendStatus(200); // OK
       }).catch(error => {
-          console.log('Error in /api/dog PUT:', error);
-          res.sendStatus(500);
+        console.log('Error in /api/dog PUT:', error);
+        res.sendStatus(500);
       });
   } else {
     // forbidden if not logged in

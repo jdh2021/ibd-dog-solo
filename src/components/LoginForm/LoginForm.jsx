@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 // mui imports
@@ -8,11 +7,11 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
-// fa imports
+// fontawesoje imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
@@ -83,38 +82,3 @@ function LoginForm() {
 }
 
 export default LoginForm;
-
-
-{/* <h2>Login</h2>
-{errors.loginMessage && (
-  <h3 className="alert" role="alert">
-    {errors.loginMessage}
-  </h3>
-)}
-<div>
-  <label htmlFor="username">
-    Username:
-    <input
-      type="text"
-      name="username"
-      required
-      value={username}
-      onChange={(event) => setUsername(event.target.value)}
-    />
-  </label>
-</div>
-<div>
-  <label htmlFor="password">
-    Password:
-    <input
-      type="password"
-      name="password"
-      required
-      value={password}
-      onChange={(event) => setPassword(event.target.value)}
-    />
-  </label>
-</div>
-<div>
-  <input className="btn" type="submit" name="submit" value="Log In" />
-</div> */}

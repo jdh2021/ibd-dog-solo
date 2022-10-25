@@ -10,10 +10,11 @@ function* fetchMedication(action) {
     console.log('Dog id to retrieve medication for is:', action.payload);
     const dogMedication = yield axios.get(`/api/medication/${action.payload}`);
     console.log('dogMedication array:', dogMedication.data);
+    // after successful GET, dispatch action to store medication(s) in medication reducer
     yield put({ type: 'SET_MEDICATION', payload: dogMedication.data });
   } catch (error) {
-    console.log('Error in fetchMedication by dog');
-    swal('There\'s an error in fetchMedication by dog.');
+    console.log('Error in fetchMedication:', error);
+    swal('There\'s an error in fetchMedication.');
   }
 }
 

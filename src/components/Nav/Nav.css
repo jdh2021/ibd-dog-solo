@@ -1,5 +1,4 @@
 .nav {
-  /* flex box layout */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +11,6 @@
   display: flex;
   text-align: center;
   justify-content: center;
-  align-items: center;
   overflow: hidden;
   background-color: plum;
   padding-top: 1.8rem;
@@ -34,8 +32,6 @@
 }
 
 .navLink {
-  /* min-width: 20px;
-  max-width: 20px; */
   display: inline-block;
   color: #9c27b0;
   background-color: white;

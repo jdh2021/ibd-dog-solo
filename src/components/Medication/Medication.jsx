@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Medication.css';
 
-// material ui imports
+// mui imports
 import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
@@ -22,15 +24,9 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-// material ui date picker imports 
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs';
-
 // fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPills } from '@fortawesome/free-solid-svg-icons';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPills, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 // sweetalert
 import swal from 'sweetalert';
@@ -234,7 +230,7 @@ function Medication() {
                   } else {
                     medicationStatus = 'Inactive-row'
                   }
-                  // date formatting to display date medication started on page. first check if null. 
+                  // formatting to display date medication started, inactive on page. first check if null. 
                   let medStartDate = '';
                   let formattedMedStartDate = '';
                   let medEndDate = '';

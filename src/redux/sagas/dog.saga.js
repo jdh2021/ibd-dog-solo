@@ -24,6 +24,7 @@ function* putDog(action) {
   try {
     console.log('dog object to update is:', action.payload);
     yield axios.put('/api/dog', action.payload);
+    // after successful PUT, dispatch 'FETCH_DOG'
     action.handleEditSuccess();
   } catch (error) {
     console.log('Error in putDog:', error);
