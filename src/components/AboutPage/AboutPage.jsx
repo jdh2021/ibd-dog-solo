@@ -13,13 +13,13 @@ function AboutPage() {
 
   return (
     <Grid container justifyContent="center">
-      <Grid item xs={8} sm={7} md={6} lg={4.5} xl={3.25}>
+      <Grid item xs={10} sm={7.5} md={5.5} lg={4.5} xl={3.25}>
         <Card elevation={4} sx={{ backgroundColor: "#eaeef1", mb: 4, mt: 4, pb: 2 }}>
           <CardContent>
             <Typography variant="h6" sx={{ mt: 2, mb: 2 }}>
               About IBDog
             </Typography>
-            <Typography sx={{ ml: 2, mr: 2 }}>
+            <Typography sx={{ ml: 3, mr: 3 }}>
               Pet owners play a crucial role in navigating veterinary healthcare systems and advocating for their animals.
               IBDog was born from the desire to improve quality of life for dogs with Inflammatory Bowel Disease by helping owners
               better manage the condition and communicate their observations with treating veterinarians.
