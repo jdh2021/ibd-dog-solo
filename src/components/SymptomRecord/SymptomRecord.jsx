@@ -114,7 +114,7 @@ function SymptomRecord({ symptomRecord, handleEdit }) {
     HealthColor = "red";
   }
 
-  // prompt if record should be deleted, takes in id of record clicked on. if confirmed, calls deleteFeedback and passes ID as argument
+  // prompts if record should be deleted, takes in id of record clicked on. if confirmed, calls deleteFeedback and passes ID as argument
   const confirmDelete = (id) => {
     console.log('in confirmDelete. Record id to delete is:', id);
     swal({

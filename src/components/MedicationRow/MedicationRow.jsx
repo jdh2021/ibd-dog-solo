@@ -10,8 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-function MedicationRow({ medication, confirmDelete, editMedicationStatus }) {
-  // conditional formatting if medication is active or inactive
+function MedicationRow({ medication, editMedicationStatus, confirmDelete }) {
+  // conditional formatting of row if medication is active or inactive
   let medicationStatus;
   if (medication.active) {
     medicationStatus = 'Active-row'
@@ -37,11 +37,7 @@ function MedicationRow({ medication, confirmDelete, editMedicationStatus }) {
   }
 
   return (
-    <TableRow
-      key={medication.id}
-      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-      className={medicationStatus}
-    >
+    <TableRow key={medication.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }} className={medicationStatus}>
       <TableCell component="th" scope="row" align="center" sx={{ pt: 0.3, pb: 0.3 }}>
         {medication.name}
       </TableCell>

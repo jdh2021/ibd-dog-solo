@@ -26,7 +26,7 @@ Pet owners play a crucial role in navigating veterinary healthcare systems and a
 
 ### Built With
 
-React.js | Redux | Redux-Saga | Material UI | Axios | PostgreSQL | Node.js | Express
+React.js | Redux | Redux-Saga | Material UI | PostgreSQL | Node.js | Express.js | JavaScript | CSS
 
 ### Usage
 
@@ -52,7 +52,7 @@ React.js | Redux | Redux-Saga | Material UI | Axios | PostgreSQL | Node.js | Exp
 
 1. Click the paw icon under the header or the home icon in the footer to access the Home page. 
 2. This page displays the dog's name, birthday, current food, and active medications.
-3. To make edits to the dog's name, birthday, food, or image, click `EDIT`. Update the fields with any changes. Click `SAVE` to preserve your changes or `CANCEL` to discard.
+3. To make edits to the dog's name, birthday, food, or image, click `EDIT`. Update the fields with any changes. Click `SAVE` to preserve the changes or `CANCEL` to discard.
 
 #### Check-In
 
@@ -70,7 +70,7 @@ React.js | Redux | Redux-Saga | Material UI | Axios | PostgreSQL | Node.js | Exp
 #### Medications
 
 1. Click the pill icon under the header to access Medications.
-2. Add a medication by clicking the purple plus button above the Medications table. Enter a name, dosage, frequency, and start date. Click `SUBMIT` when done. Medications are active by default when added.
+2. Add a medication by clicking the purple plus button above the Medications table. Enter a name, dosage, frequency, and optional start date. Click `SUBMIT` when done. Medications are active by default when added.
 3. Mark a medication inactive by deselecting the checkbox under the Active column. The date the medication was marked inactive is generated in the End column if a start date was provided.
 4. Delete a medication by clicking the trash icon. A prompt will ask for confirmation prior to deleting.
 5. Active medications appear on the Medications page as well as on the Home page. 

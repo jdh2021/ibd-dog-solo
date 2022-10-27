@@ -83,7 +83,7 @@ function Medication() {
     setOpen(false);
   }
 
-  // prompt if medication should be deleted, takes in id of medication clicked on. if confirmed, calls deleteMedication and passes id as argument
+  // prompts if medication should be deleted, takes in id of medication clicked on. if confirmed, calls deleteMedication and passes id as argument
   const confirmDelete = (id) => {
     console.log('in confirmDelete. Medication id to delete is:', id);
     swal({
@@ -132,17 +132,7 @@ function Medication() {
         })
       }
     }
-    else if (medication.active === true && medication.date_started === null) {
-      dispatch({
-        type: 'PUT_MEDICATION',
-        payload: {
-          id: medication.id,
-          active: !medication.active,
-          date_inactive: null,
-        },
-        handleMedicationChange: handleMedicationChange
-      })
-    } else if (medication.active === false) {
+    else if ((medication.active === true && medication.date_started === null) || medication.active === false) {
       dispatch({
         type: 'PUT_MEDICATION',
         payload: {
@@ -227,8 +217,8 @@ function Medication() {
                       editMedicationStatus={editMedicationStatus}
                       confirmDelete={confirmDelete}
                     />
-                  )}
-                )}
+                  )
+                })}
               </TableBody>
             </Table>
           </TableContainer>
