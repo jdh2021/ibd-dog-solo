@@ -17,6 +17,7 @@ import HomePage from '../HomePage/HomePage';
 import LoginPage from '../LoginPage/LoginPage';
 import Medication from '../Medication/Medication';
 import Nav from '../Nav/Nav';
+import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
@@ -117,7 +118,7 @@ function App() {
               </Route>
               {/* If none of the other routes matched, we will show a 404. */}
               <Route>
-                <h1>404</h1>
+                <PageNotFound />
               </Route>
             </Switch>
           </div>
