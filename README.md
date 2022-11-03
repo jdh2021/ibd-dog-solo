@@ -3,6 +3,8 @@
 
 Pet owners play a crucial role in navigating veterinary healthcare systems and advocating for their animals. IBDog improves quality of life for dogs with Inflammatory Bowel Disease by helping owners better manage the chronic condition and communicate their observations with treating veterinarians. Users log symptoms, update medications, and see their dog's condition over time via a health score heatmap. 
 
+Check out the deployed app [here](https://ibd-dog.herokuapp.com/#) on Heroku. 
+
 ### Screenshots
 <h4 align="center">Home</h4>
 <div align="center">
