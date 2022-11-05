@@ -4,6 +4,8 @@ const recordReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_RECORD':
       return action.payload;
+    case 'UNSET_USER':
+      return [];
     default:
       return state;
   }

@@ -7,9 +7,9 @@ import swal from 'sweetalert';
 function* fetchMedication(action) {
   // payload is dog id
   try {
-    console.log('Dog id to retrieve medication for is:', action.payload);
+    // console.log('Dog id to retrieve medication for is:', action.payload);
     const dogMedication = yield axios.get(`/api/medication/${action.payload}`);
-    console.log('dogMedication array:', dogMedication.data);
+    // console.log('dogMedication array:', dogMedication.data);
     // after successful GET, dispatch action to store medication(s) in medication reducer
     yield put({ type: 'SET_MEDICATION', payload: dogMedication.data });
   } catch (error) {
@@ -21,7 +21,7 @@ function* fetchMedication(action) {
 function* postMedication(action) {
   // payload is medication object
   try {
-    console.log('medication to post is:', action.payload);
+    // console.log('medication to post is:', action.payload);
     yield axios.post('/api/medication', action.payload);
     // after successul POST, dispatch 'FETCH_DOG' and clear inputs
     action.handleMedicationPost();
@@ -34,7 +34,7 @@ function* postMedication(action) {
 function* deleteMedication(action) {
   // payload is medication id
   try {
-    console.log('medication id to delete is', action.payload);
+    // console.log('medication id to delete is', action.payload);
     yield axios.delete(`/api/medication/${action.payload}`);
     // after successful DELETE, dispatch 'FETCH_MEDICATION'
     action.handleMedicationChange();
@@ -47,7 +47,7 @@ function* deleteMedication(action) {
 function* putMedication(action) {
   // payload is medication object
   try {
-    console.log('medication object to update is', action.payload);
+    // console.log('medication object to update is', action.payload);
     yield axios.put('/api/medication', action.payload);
     // after successful PUT, dispatch 'FETCH_MEDICATION'
     action.handleMedicationChange();

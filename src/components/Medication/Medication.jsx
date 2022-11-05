@@ -85,7 +85,7 @@ function Medication() {
 
   // prompts if medication should be deleted, takes in id of medication clicked on. if confirmed, calls deleteMedication and passes id as argument
   const confirmDelete = (id) => {
-    console.log('in confirmDelete. Medication id to delete is:', id);
+    // console.log('in confirmDelete. Medication id to delete is:', id);
     swal({
       text: "Do you want to delete this medication?",
       icon: "warning",

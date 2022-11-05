@@ -116,7 +116,7 @@ function SymptomRecord({ symptomRecord, handleEdit }) {
 
   // prompts if record should be deleted, takes in id of record clicked on. if confirmed, calls deleteFeedback and passes ID as argument
   const confirmDelete = (id) => {
-    console.log('in confirmDelete. Record id to delete is:', id);
+    // console.log('in confirmDelete. Record id to delete is:', id);
     swal({
       text: "Do you want to delete this record?",
       icon: "warning",

@@ -7,9 +7,9 @@ import swal from 'sweetalert';
 function* fetchRecord(action) {
   // payload is dog id
   try {
-    console.log('Dog id to retrieve record(s) for is:', action.payload);
+    // console.log('Dog id to retrieve record(s) for is:', action.payload);
     const dogRecord = yield axios.get(`/api/symptom/${action.payload}`);
-    console.log('dogRecord array:', dogRecord.data);
+    // console.log('dogRecord array:', dogRecord.data);
     // after successful GET, dispatch action to store record(s) in record reducer
     yield put({ type: 'SET_RECORD', payload: dogRecord.data });
   } catch (error) {
@@ -21,7 +21,7 @@ function* fetchRecord(action) {
 function* postRecord(action) {
   // payload is symptom record object
   try {
-    console.log('symptom record to post is:', action.payload);
+    // console.log('symptom record to post is:', action.payload);
     yield axios.post('/api/symptom', action.payload);
     // after successful POST, navigate to HealthStatus and clear inputs
     action.goToHealthStatus();
@@ -34,7 +34,7 @@ function* postRecord(action) {
 function* deleteRecord(action) {
   // payload is symptom record id
   try {
-    console.log('symptom record id to delete is', action.payload);
+    // console.log('symptom record id to delete is', action.payload);
     yield axios.delete(`/api/symptom/${action.payload}`);
     // after successful DELETE, dispatch 'FETCH_RECORD'
     action.handleSymptomRecordDelete();
@@ -47,7 +47,7 @@ function* deleteRecord(action) {
 function* putRecord(action) {
   // payload is symptom record object
   try {
-    console.log('symptom record to update is', action.payload);
+    // console.log('symptom record to update is', action.payload);
     yield axios.put('/api/symptom', action.payload);
     // after successful PUT, dispatch 'FETCH_RECORD'
     action.handleEditRecordSuccess();

@@ -31,7 +31,7 @@ function HealthStatus() {
 
   // when edit button clicked in SymptomRecord, sets symptom record id to edit
   const handleEdit = (id) => {
-    console.log('in handleEdit. symptom record id to edit is:', id);
+    // console.log('in handleEdit. symptom record id to edit is:', id);
     setEditSymptomRecordId(id);
   }
 

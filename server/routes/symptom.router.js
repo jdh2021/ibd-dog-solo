@@ -4,9 +4,9 @@ const router = express.Router();
 
 // GET symptom - check dog_id and req.user.id
 router.get('/:id', (req, res) => {
-  console.log('in /api/symptom GET by dog id. Dog id to get records by is:', req.params.id);
-  console.log('is authenticated?', req.isAuthenticated());
-  console.log('user id is:', req.user.id);
+  // console.log('in /api/symptom GET by dog id. Dog id to get records by is:', req.params.id);
+  // console.log('is authenticated?', req.isAuthenticated());
+  // console.log('user id is:', req.user.id);
   if (req.isAuthenticated()) {
     const queryText = `SELECT "symptom"."id", "symptom"."appetite", "symptom"."energy", 
                       "symptom"."stomach_pain", "symptom"."vomit", "symptom"."diarrhea", 
@@ -30,9 +30,9 @@ router.get('/:id', (req, res) => {
 
 // POST symptom - check dog_id and req.user.id
 router.post('/', (req, res) => {
-  console.log('in /api/symptom POST. Symptom object to post is:', req.body);
-  console.log('is authenticated?', req.isAuthenticated());
-  console.log('user id is:', req.user.id);
+  // console.log('in /api/symptom POST. Symptom object to post is:', req.body);
+  // console.log('is authenticated?', req.isAuthenticated());
+  // console.log('user id is:', req.user.id);
   // convert values from CheckIn to numbers and add to get health score
   req.body.score =  Number(req.body.appetite) + Number(req.body.energy) + Number(req.body.stomach_pain) +
                     Number(req.body.vomit) + Number(req.body.diarrhea);
@@ -61,9 +61,9 @@ router.post('/', (req, res) => {
 
 // DELETE symptom - check req.user.id
 router.delete('/:id', (req, res) => {
-  console.log('in /api/symptom DELETE by id. Symptom record by id to delete is:', req.params.id);
-  console.log('is authenticated?', req.isAuthenticated());
-  console.log('user id is:', req.user.id);
+  // console.log('in /api/symptom DELETE by id. Symptom record by id to delete is:', req.params.id);
+  // console.log('is authenticated?', req.isAuthenticated());
+  // console.log('user id is:', req.user.id);
   if (req.isAuthenticated()) {
     const queryText = `DELETE FROM "symptom" USING "dog"
                       WHERE "symptom"."id" = $1 AND "dog"."id"="symptom"."dog_id" 
@@ -82,9 +82,9 @@ router.delete('/:id', (req, res) => {
 
 // PUT symptom - check dog_id and req.user.id
 router.put('/', (req, res) => {
-  console.log('in /api/symptom PUT. Symptom object to update is:', req.body);
-  console.log('is authenticated?', req.isAuthenticated());
-  console.log('user id is:', req.user.id);
+  // console.log('in /api/symptom PUT. Symptom object to update is:', req.body);
+  // console.log('is authenticated?', req.isAuthenticated());
+  // console.log('user id is:', req.user.id);
   req.body.score =  Number(req.body.appetite) + Number(req.body.energy) + Number(req.body.stomach_pain) +
                     Number(req.body.vomit) + Number(req.body.diarrhea);
   console.log('Updated score is:', req.body.score);

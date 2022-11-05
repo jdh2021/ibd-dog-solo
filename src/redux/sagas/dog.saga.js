@@ -7,7 +7,7 @@ import swal from 'sweetalert';
 function* fetchDog() {
   try {
     const userDog = yield axios.get('/api/dog');
-    console.log('get dog by userId:', userDog.data);
+    // console.log('get dog by userId:', userDog.data);
     // after successful GET, dispatch action to store dog in dog reducer
     yield put({ type: 'SET_DOG', payload: userDog.data });
     // after successful SET, 'FETCH_MEDICATION', 'FETCH_RECORD' using dog data
@@ -22,7 +22,7 @@ function* fetchDog() {
 function* putDog(action) {
   // payload is dog object
   try {
-    console.log('dog object to update is:', action.payload);
+    // console.log('dog object to update is:', action.payload);
     yield axios.put('/api/dog', action.payload);
     // after successful PUT, dispatch 'FETCH_DOG'
     action.handleEditSuccess();

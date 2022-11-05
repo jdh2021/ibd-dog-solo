@@ -4,9 +4,9 @@ const router = express.Router();
 
 // GET medication - check dog_id and req.user.id
 router.get('/:id', (req, res) => {
-  console.log('in /api/medication GET by dog id. Dog id to get medications by is:', req.params.id);
-  console.log('is authenticated?', req.isAuthenticated());
-  console.log('user id is:', req.user.id);
+  // console.log('in /api/medication GET by dog id. Dog id to get medications by is:', req.params.id);
+  // console.log('is authenticated?', req.isAuthenticated());
+  // console.log('user id is:', req.user.id);
   if (req.isAuthenticated()) {
     const queryText = `SELECT "medication"."id", "medication"."name", 
                       "medication"."frequency", "medication"."dosage", 
@@ -31,9 +31,9 @@ router.get('/:id', (req, res) => {
 
 // POST medication - check dog_id and req.user.id
 router.post('/', (req, res) => {
-  console.log('in /api/medication POST. Medication object to post is:', req.body);
-  console.log('is authenticated?', req.isAuthenticated());
-  console.log('user id is:', req.user.id);
+  // console.log('in /api/medication POST. Medication object to post is:', req.body);
+  // console.log('is authenticated?', req.isAuthenticated());
+  // console.log('user id is:', req.user.id);
   if (req.isAuthenticated()) {
     const queryText = `INSERT INTO "medication" ("name", "dosage", "frequency", "date_started", "dog_id") 
                       SELECT $1, $2, $3, $4, $5
@@ -57,9 +57,9 @@ router.post('/', (req, res) => {
 
 // DELETE medication - check dog id, req.user.id
 router.delete('/:id', (req, res) => {
-  console.log('in /api/medication DELETE by id. Medication by id to delete is:', req.params.id);
-  console.log('is authenticated?', req.isAuthenticated());
-  console.log('user id is:', req.user.id);
+  // console.log('in /api/medication DELETE by id. Medication by id to delete is:', req.params.id);
+  // console.log('is authenticated?', req.isAuthenticated());
+  // console.log('user id is:', req.user.id);
   if (req.isAuthenticated()) {
     const queryText = `DELETE FROM "medication" USING "dog"
                       WHERE "medication"."id" = $1 AND "dog"."id"="medication"."dog_id" 
@@ -78,9 +78,9 @@ router.delete('/:id', (req, res) => {
 
 // PUT medication - check dog id, req.user.id
 router.put('/', (req, res) => {
-  console.log('in /api/medication PUT. Medication object to update is:', req.body);
-  console.log('is authenticated?', req.isAuthenticated());
-  console.log('user id is:', req.user.id);
+  // console.log('in /api/medication PUT. Medication object to update is:', req.body);
+  // console.log('is authenticated?', req.isAuthenticated());
+  // console.log('user id is:', req.user.id);
   if (req.isAuthenticated()) {
     const queryText = `UPDATE "medication"
                       SET "active" = $1, "date_inactive" = $2

@@ -16,8 +16,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // Handles POST request with new user data and dog. Password gets encrypted before being inserted
 router.post('/register', async (req, res, next) => {
-  console.log('in api/user/register POST');
-  console.log('Req.body is:', req.body);
+  // console.log('in api/user/register POST');
+  // console.log('Req.body is:', req.body);
   const client = await pool.connect();
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
@@ -29,7 +29,7 @@ router.post('/register', async (req, res, next) => {
                       VALUES ($1, $2) RETURNING "id";`;
     const result = await pool.query(queryText, [username, password])
     const userId = result.rows[0].id; // first, userId is created
-    console.log('User id is:', userId);
+    // console.log('User id is:', userId);
     await pool.query( `INSERT INTO "dog" ("name", "birthday", "food", "user_id", "image")
                       VALUES($1, $2, $3, $4, $5);`, [dogName, dogBirthday, '', userId, '']);
     await client.query('COMMIT'); // Commit if queries succeed
